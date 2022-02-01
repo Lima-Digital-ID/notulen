@@ -37,9 +37,10 @@
                                 <tr>
                                     <th>Nama</th>
                                     <th>Kategori</th>
-                                    <th>Partai</th>
+                                    <th>Fraksi</th>
                                     <th>Komisi</th>
                                     <th>Badan</th>
+                                    <th>Jabatan</th>
                                     <th width="150px">Action</th>
                                 </tr>
                             </thead>

@@ -23,36 +23,12 @@
                 <div class="card-body">
                     <h4 class="card-title"><?=$title?></h4>
                     <?php echo form_open_multipart($action) ?>
-                        <div class="form-group row" hidden>
-                            <label class="col-lg-3 control-label text-lg-right pt-2">
-                                ID Pegawai <?php echo form_error('id_pegawai') ?>
-                            </label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" name="id_pegawai" id="id_pegawai" placeholder="ID Pegawai Auto Number" readonly="true" value="<?php echo $id_pegawai; ?>" />
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2">
                                Nama Anggota
                             </label>
                             <div class="col-lg-6">
                                <input type="text" class="form-control" name="nama_pegawai" id="nama_pegawai" placeholder="Nama Anngota" value="<?php echo $nama_pegawai; ?>" required />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 control-label text-lg-right pt-2">
-                               NIP
-                            </label>
-                            <div class="col-lg-6">
-                               <input type="text" class="form-control" name="nip" id="nip" placeholder="NIP" value="<?php echo $nip; ?>" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 control-label text-lg-right pt-2">
-                               NIA
-                            </label>
-                            <div class="col-lg-6">
-                               <input type="text" class="form-control" name="nia" id="nia" placeholder="NIA" value="<?php echo $nia; ?>" />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -69,60 +45,6 @@
                                         }
                                     ?>
                                 </select>
-                            </div>
-                        </div>
-                        <div class="form-group row" hidden>
-                            <label class="col-lg-3 control-label text-lg-right pt-2">
-                                Upload Tanda Tangan
-                            </label>
-                            <div class="col-lg-6">
-                            <?php 
-                            //when edit
-                                $required = "required";
-                                if(isset($infoTtd)){
-                                    $required = "";
-                            ?>
-                            <img src="<?php echo base_url()."assets/images/upload-ttd/".$ttd ?>" alt="" width="200px">
-                            <br>
-                            <?php } ?>
-                                <?php echo isset($infoTtd) ? "<small style='color:red'>$infoTtd</small>" : "" ?>
-                                <input type="file" name="ttd" class="form-control" id="" <?=$required?>>
-                            </div>
-                        </div>
-                        <div class="form-group row" id="row_partai">
-                            <label class="col-lg-3 control-label text-lg-right pt-2">
-                                Partai
-                            </label>
-                            <div class="col-lg-6">
-                                <select name="id_partai" id="id_partai" class="form-control select2" style="width:100%">
-                                </select>
-                            </div>
-                            <div class="col-lg-2">
-                                <button type="button" class="btn btn-primary btn-sm" data-target="#modalAddPartai" data-toggle="modal" style="margin-top:5px"><i class="fa fa-plus"></i></button>
-                            </div>
-                        </div>
-                        <div class="form-group row" id="row_komisi">
-                            <label class="col-lg-3 control-label text-lg-right pt-2">
-                                Komisi
-                            </label>
-                            <div class="col-lg-6">
-                                <select name="id_komisi" id="id_komisi" class="form-control select2" style="width:100%">
-                                </select>
-                            </div>
-                            <div class="col-lg-2">
-                                <button type="button" class="btn btn-primary btn-sm" data-target="#modalAddKomisi" data-toggle="modal" style="margin-top:5px"><i class="fa fa-plus"></i></button>
-                            </div>
-                        </div>
-                        <div class="form-group row" id="row_badan">
-                            <label class="col-lg-3 control-label text-lg-right pt-2">
-                                Badan
-                            </label>
-                            <div class="col-lg-6">
-                                <select name="id_badan" id="id_badan" class="form-control select2" style="width:100%">
-                                </select>
-                            </div>
-                            <div class="col-lg-2">
-                                <button type="button" class="btn btn-primary btn-sm" data-target="#modalAddbadan" data-toggle="modal" style="margin-top:5px"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
                         <div class="form-group row">

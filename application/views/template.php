@@ -285,17 +285,42 @@ $role_id=$this->session->userdata('role');
                       
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-box"></i><span class="hide-menu">Data Base</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <?php
+                                <!-- <?php
                                     $getTipePegawai = $this->Admin_model->getData('*','tipe_pegawai','','','')->result_array();
                                     foreach ($getTipePegawai as $key => $value) {
                                     ?>
                                         <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('pegawai?tipe='.$value['id_tipe'])?>" aria-expanded="false"><i class="mdi mdi-album"></i><span class="hide-menu"><?= $value['tipe'] ?></span></a></li>
                                     <?php
                                     }
-                                ?>
+                                ?> -->
+                                <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> >
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('pegawai?tipe=1')?>"    aria-expanded="false">
+                                        <i class="mdi mdi-album"></i><span class="hide-menu">Anggota DPRD Kota Blitar</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> >
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('pegawai/index_dprd')?>"    aria-expanded="false">
+                                        <i class="mdi mdi-album"></i><span class="hide-menu">Sekretariat DPRD</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> >
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('pegawai/index_forkompimda')?>"    aria-expanded="false">
+                                        <i class="mdi mdi-album"></i><span class="hide-menu">Mitra Kerja FORKOMPIMDA</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> >
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('pegawai/index_horizontal')?>"    aria-expanded="false">
+                                        <i class="mdi mdi-album"></i><span class="hide-menu">Mitra Kerja HORIZONTAL</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> >
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('pegawai/index_vertical')?>"    aria-expanded="false">
+                                        <i class="mdi mdi-album"></i><span class="hide-menu">Mitra Kerja VERTICAL</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
-                        <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('jabatan')?>" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Jabatan</span></a></li>
+                        <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('jabatan')?>" aria-expanded="false"><i class="mdi mdi-clipboard"></i><span class="hide-menu">Jabatan</span></a></li>
 
                         <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('user')?>" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">User</span></a></li>
                        

@@ -28,7 +28,7 @@
             <div class="card">
                 <div class="card-header"><?= $title ?></div>
                 <div class="card-body">
-                    <a href="<?=base_url('pegawai/create')?>"><button class="btn-primary btn btn-md">Tambah</button></a>
+                    <a href="<?=base_url('pegawai/create_non_dprd')?>"><button class="btn-primary btn btn-md">Tambah</button></a>
                     <?php echo anchor(site_url('pegawai/import_excel'), '<i class="fa fa-upload" aria-hidden="true"></i> Import Pegawai', 'class="hide btn btn-success"'); ?>
                     <br><br>
                     <div class="table-responsive">
@@ -36,10 +36,7 @@
                             <thead>
                                 <tr>
                                     <th>Nama</th>
-                                    <th>Kategori</th>
-                                    <th>Partai</th>
-                                    <th>Komisi</th>
-                                    <th>Badan</th>
+                                    <th>Jabatan</th>
                                     <th width="150px">Action</th>
                                 </tr>
                             </thead>
