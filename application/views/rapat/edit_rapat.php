@@ -91,12 +91,12 @@
                             <label for="">Nomor Rapat</label>
                             <input type="text" name="event" value="<?= $rapat->event ?>"  class="form-control">
                         </div>           
-                        <div class="form-group" id="nomorRapat">
+                        <!-- <div class="form-group" id="nomorRapat">
                             <label for="">Lampiran</label>
                             <textarea name="lampiran" id="ckeditor" cols="50" rows="15" class="ckeditor">
                             <?= $rapat->lampiran ?>                            
                             </textarea>
-                        </div>           
+                        </div>            -->
 
                         <div class="row">
                         <div class="col-md-5"><hr></div><div class="col-md-2"><center style="margin-top:5px"><h5>Peserta Rapat</h5></center></div><div class="col-md-5"><hr></div>

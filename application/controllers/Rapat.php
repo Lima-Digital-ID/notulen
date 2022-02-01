@@ -241,7 +241,7 @@ class Rapat extends CI_Controller {
             'tipe'      =>$this->input->post('tipe'),
             'sifat'     =>$this->input->post('sifat'),
             'event'     => empty($this->input->post('event')) ? "" : $this->input->post('event'),
-            'lampiran'     =>$this->input->post('lampiran'),
+            // 'lampiran'     =>$this->input->post('lampiran'),
 		);
 		if(isset($_POST['sekretaris'])){
 			$data['sekretaris'] = $_POST['sekretaris'];
@@ -319,7 +319,7 @@ class Rapat extends CI_Controller {
             'tipe'      =>$this->input->post('tipe'),
             'sifat'     =>$this->input->post('sifat'),
             'event'     => empty($this->input->post('event')) ? "" : $this->input->post('event'),
-            'lampiran'     =>$this->input->post('lampiran'),
+            // 'lampiran'     =>$this->input->post('lampiran'),
 		);
 		if(isset($_POST['sekretaris'])){
 			$data['sekretaris'] = $_POST['sekretaris'];
