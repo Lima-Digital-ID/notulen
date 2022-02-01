@@ -29,11 +29,23 @@ class Pegawai extends CI_Controller
         
         $this->template->load('template','hrms/pegawai/tbl_pegawai_list', $data);
     } 
+
+    public function index_dprd()
+    {   
+        $data['title']='Anggota DPRD';
+        $this->template->load('template','hrms/pegawai/tbl_dprd_list', $data);
+    }
     
     public function json() {
         header('Content-Type: application/json');
         echo $this->Tbl_pegawai_model->json($this->location_id,$_POST['id_tipe']);
     }
+
+    public function json_dprd() {
+        header('Content-Type: application/json');
+        echo $this->Tbl_pegawai_model->json_dprd();
+    }
+
     public function create() 
     {
         $data = array(
@@ -56,10 +68,30 @@ class Pegawai extends CI_Controller
             'allJab' => $this->Tbl_jabatan_model->get_all(),
             'getTipe' => $this->Admin_model->getData('*','tipe_pegawai','','','')->result_array()
 	    );
-        var_dump($this->Tbl_jabatan_model->get_all());
         $data['title']='Tambah Anggota';
         $this->template->load('template','hrms/pegawai/tbl_pegawai_form', $data);
     }
+
+    public function create_dprd() 
+    {
+        $data = array(
+            'button' => 'Create',
+            'action' => site_url('pegawai/create_action_dprd'),
+    	    'id_pegawai' => set_value('id_pegawai'),
+    	    'nama_pegawai' => set_value('nama_pegawai'),
+            'nip' => set_value('nip'),
+            'nia' => set_value('-'),
+            'tipe' => set_value(0),
+            'id_partai' => set_value('id_partai'),
+            'id_komisi' => set_value('id_komisi'),
+            'id_badan' => set_value('id_badan'),
+            'allJab' => $this->Tbl_jabatan_model->get_all(),
+            'getTipe' => $this->Admin_model->getData('*','tipe_pegawai','','','')->result_array()
+	    );
+        $data['title']='Tambah Anggota';
+        $this->template->load('template','hrms/pegawai/tbl_dprd_form', $data);
+    }
+
     public function getJenis()
     {
         $jenis = $this->Admin_model->getData('id_jenis,jenis','jenis_pegawai','',['id_tipe' => $_POST['id_tipe']],'')->result_array();
@@ -67,6 +99,47 @@ class Pegawai extends CI_Controller
         echo json_encode($jenis);
     }
     
+    public function create_action_dprd() 
+    {
+        // $this->_rules();
+
+        
+        $this->load->helper('string');
+        $fileName = random_string('alnum', 16);
+        
+        $config['upload_path']          = './assets/images/upload-ttd/';
+        $config['allowed_types']        = 'jpeg|jpg|png';
+        $config['max_size']             = 512;
+        $config['file_name']             = $fileName;
+        $this->load->library('upload', $config);
+        
+        if(!$this->upload->do_upload('ttd'))
+        {
+            $error = array('error' => $this->upload->display_errors());
+            print_r($error);
+        }
+        else
+        {
+            $path = $_FILES['ttd']['name'];
+            $ext = pathinfo($path, PATHINFO_EXTENSION);            
+            $fileName = $config['file_name'].".".$ext;
+            $data = array(
+                'nama_pegawai' => $this->input->post('nama_pegawai',TRUE),
+                'nip' => $this->input->post('nip',TRUE),
+                'tipe' => $this->input->post('tipe',TRUE),
+                'id_partai' => $this->input->post('id_partai',TRUE),
+                'id_komisi' => $this->input->post('id_komisi',TRUE),
+                'id_badan' => $this->input->post('id_badan',TRUE),
+        );
+            $this->Tbl_pegawai_model->insert($data);
+            $this->session->set_flashdata('message', 'Create Record Success 2');
+            redirect(site_url('pegawai?tipe='.$data['tipe']));
+        }
+        // if ($this->form_validation->run() == FALSE) {
+        //     $this->create();
+        // } else {
+        // }
+    }
     public function create_action() 
     {
         // $this->_rules();
