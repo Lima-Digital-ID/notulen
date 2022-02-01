@@ -31,6 +31,7 @@ class Jabatan extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('jabatan/create_action'),
+    	    'id' => set_value('id'),
     	    'jabatan' => set_value('jabatan'),
 	    );
         $data['title']='Tambah Jabatan';

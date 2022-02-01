@@ -28,7 +28,9 @@
             <div class="card">
                 <div class="card-header">Data Jabatan</div>
                 <div class="card-body">
-                    <a href="<?=base_url('jabatan/create')?>"><button class="btn-primary btn btn-md">Tambah</button></a>
+                    <?php if($this->session->userdata('role') == 1) { ?>
+                        <a href="<?=base_url('jabatan/create')?>"><button class="btn-primary btn btn-md">Tambah</button></a>
+                    <?php } ?>
                     <br><br>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped" id="pegawai_list">
@@ -36,7 +38,9 @@
                                 <tr>
                                     <th width="30px">No</th>
                                     <th>Jabatan</th>
-                                    <th width="150px">Action</th>
+                                    <?php if($this->session->userdata('role') == 1) { ?>
+                                        <th width="150px">Action</th>
+                                    <?php } ?>
                                 </tr>
                             </thead>
                         
@@ -62,11 +66,13 @@
                     "data": "id",
                     "orderable": false
                 },{"data": "jabatan"},
+                <?php if($this->session->userdata('role') == 1) { ?>
                 {
                     "data" : "action",
                     "orderable": false,
                     "className" : "text-center"
                 }
+                <?php } ?>
             ],
             order: [[0, 'desc']],
         } );

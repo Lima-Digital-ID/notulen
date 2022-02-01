@@ -10,6 +10,7 @@ class Pegawai extends CI_Controller
         parent::__construct();
         is_login();
         $this->load->model('hrms/Tbl_pegawai_model');
+        $this->load->model('hrms/Tbl_jabatan_model');
         $this->load->library('form_validation');        
 	    $this->load->library('datatables');
         $this->location_id = $this->session->userdata('location_id');
@@ -52,8 +53,10 @@ class Pegawai extends CI_Controller
             'id_bamus' => set_value('id_bamus'),
             'id_banggar' => set_value('id_banggar'),
             'id_badan' => set_value('id_badan'),
+            'allJab' => $this->Tbl_jabatan_model->get_all(),
             'getTipe' => $this->Admin_model->getData('*','tipe_pegawai','','','')->result_array()
 	    );
+        var_dump($this->Tbl_jabatan_model->get_all());
         $data['title']='Tambah Anggota';
         $this->template->load('template','hrms/pegawai/tbl_pegawai_form', $data);
     }

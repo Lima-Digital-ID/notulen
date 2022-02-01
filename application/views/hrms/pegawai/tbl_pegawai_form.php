@@ -134,9 +134,9 @@
                                     <!-- <option value="" <?=$tipe == '' ? 'selected' : ''?>>--Pilih Kategori--</option> -->
                                     <!-- <option value="2">Sekretariat DPRD</option> -->
                                     <?php 
-                                        foreach ($getTipe as $key => $value) {
-                                            $selected  = $tipe==$value['id_tipe'] ? 'selected' : '';
-                                            echo "<option data-kategori='$value[kategori]' value='$value[id_tipe]' $selected>$value[tipe]</option>";
+                                        foreach ($allJab as $key => $value) {
+                                            $selected  = $tipe==$value->id ? 'selected' : '';
+                                            echo "<option value='$value->id' $selected>$value->jabatan</option>";
                                         }
                                     ?>
                                 </select>
