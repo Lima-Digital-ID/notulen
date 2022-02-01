@@ -47,7 +47,7 @@
                                <input type="text" class="form-control" name="nip" id="nip" placeholder="NIP" value="<?php echo $nip; ?>" />
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" hidden>
                             <label class="col-lg-3 control-label text-lg-right pt-2">
                                NIA
                             </label>
@@ -71,23 +71,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 control-label text-lg-right pt-2">
-                                Jenis Jabatan
-                            </label>
-                            <div class="col-lg-6">
-                                <select name="jenis_jabatan" class="form-control select2" style="width:100%" required  onchange="cekKategori()">
-                                    <option value="" <?=$tipe == '' ? 'selected' : ''?>>--Pilih Kategori--</option>
-                                    <?php 
-                                        foreach ($getTipe as $key => $value) {
-                                            $selected  = $tipe==$value['id_tipe'] ? 'selected' : '';
-                                            echo "<option data-kategori='$value[kategori]' value='$value[id_tipe]' $selected>$value[tipe]</option>";
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
+                        <div class="form-group row" hidden>
                             <label class="col-lg-3 control-label text-lg-right pt-2">
                                 Upload Tanda Tangan
                             </label>
@@ -105,7 +89,7 @@
                                 <input type="file" name="ttd" class="form-control" id="" <?=$required?>>
                             </div>
                         </div>
-                        <div class="form-group row" id="row_partai">
+                        <div class="form-group row" id="row_partai"hidden>
                             <label class="col-lg-3 control-label text-lg-right pt-2">
                                 Partai
                             </label>
@@ -139,6 +123,23 @@
                             </div>
                             <div class="col-lg-2">
                                 <button type="button" class="btn btn-primary btn-sm" data-target="#modalAddbadan" data-toggle="modal" style="margin-top:5px"><i class="fa fa-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 control-label text-lg-right pt-2">
+                                Jabatan
+                            </label>
+                            <div class="col-lg-6">
+                                <select name="jenis_jabatan" multiple="multiple"  class="form-control select2" style="width:100%" required  onchange="cekKategori()">
+                                    <!-- <option value="" <?=$tipe == '' ? 'selected' : ''?>>--Pilih Kategori--</option> -->
+                                    <!-- <option value="2">Sekretariat DPRD</option> -->
+                                    <?php 
+                                        foreach ($getTipe as $key => $value) {
+                                            $selected  = $tipe==$value['id_tipe'] ? 'selected' : '';
+                                            echo "<option data-kategori='$value[kategori]' value='$value[id_tipe]' $selected>$value[tipe]</option>";
+                                        }
+                                    ?>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">

@@ -295,6 +295,8 @@ $role_id=$this->session->userdata('role');
                                 ?>
                             </ul>
                         </li>
+                        <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('jabatan')?>" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Jabatan</span></a></li>
+
                         <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('user')?>" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">User</span></a></li>
                        
                         <li hidden class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-tune-vertical"></i><span class="hide-menu">Sidebar Type </span></a>
