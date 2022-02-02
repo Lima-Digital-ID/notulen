@@ -10,6 +10,7 @@ class Pegawai extends CI_Controller
         parent::__construct();
         is_login();
         $this->load->model('hrms/Tbl_pegawai_model');
+        $this->load->model('hrms/Tbl_jabatan_model');
         $this->load->library('form_validation');        
 	    $this->load->library('datatables');
         $this->location_id = $this->session->userdata('location_id');
@@ -24,15 +25,44 @@ class Pegawai extends CI_Controller
 
 		$tipe = isset($_GET['tipe']) ? $tipe_pegawai[0]['tipe'] : '';
 
-        $data['title']='Anggota '.$tipe;
+        $data['title']=$tipe;
         
         $this->template->load('template','hrms/pegawai/tbl_pegawai_list', $data);
     } 
+
+    public function index_dprd()
+    {   
+        $data['title']='Anggota DPRD';
+        $this->template->load('template','hrms/pegawai/tbl_dprd_list', $data);
+    }
+
+    public function index_vertical()
+    {   
+        $data['title']='Anggota Mitra Kerja VERTICAL';
+        $this->template->load('template','hrms/pegawai/tbl_non_dprd_list', $data);
+    }
+
+    public function index_horizontal()
+    {   
+        $data['title']='Anggota Mitra Kerja HORIZONTAL';
+        $this->template->load('template','hrms/pegawai/tbl_non_dprd_list', $data);
+    }
+    public function index_forkompimda()
+    {   
+        $data['title']='Anggota Mitra Kerja FORKOMPIMDA';
+        $this->template->load('template','hrms/pegawai/tbl_non_dprd_list', $data);
+    }
     
     public function json() {
         header('Content-Type: application/json');
         echo $this->Tbl_pegawai_model->json($this->location_id,$_POST['id_tipe']);
     }
+
+    public function json_dprd() {
+        header('Content-Type: application/json');
+        echo $this->Tbl_pegawai_model->json_dprd();
+    }
+
     public function create() 
     {
         $data = array(
@@ -52,11 +82,49 @@ class Pegawai extends CI_Controller
             'id_bamus' => set_value('id_bamus'),
             'id_banggar' => set_value('id_banggar'),
             'id_badan' => set_value('id_badan'),
+            'allJab' => $this->Tbl_jabatan_model->get_all(),
             'getTipe' => $this->Admin_model->getData('*','tipe_pegawai','','','')->result_array()
 	    );
         $data['title']='Tambah Anggota';
         $this->template->load('template','hrms/pegawai/tbl_pegawai_form', $data);
     }
+
+    public function create_dprd() 
+    {
+        $data = array(
+            'button' => 'Create',
+            'action' => site_url('pegawai/create_action_dprd'),
+    	    'id_pegawai' => set_value('id_pegawai'),
+    	    'nama_pegawai' => set_value('nama_pegawai'),
+            'nip' => set_value('nip'),
+            'nia' => set_value('-'),
+            'tipe' => set_value(0),
+            'id_partai' => set_value('id_partai'),
+            'id_komisi' => set_value('id_komisi'),
+            'id_badan' => set_value('id_badan'),
+            'jenis_jabatan' => set_value('jenis_jabatan'),
+            'allJab' => $this->Tbl_jabatan_model->get_all(),
+            'getTipe' => $this->Admin_model->getData('*','tipe_pegawai','','','')->result_array()
+	    );
+        $data['title']='Tambah Anggota';
+        $this->template->load('template','hrms/pegawai/tbl_dprd_form', $data);
+    }
+    
+    public function create_non_dprd() 
+    {
+        $data = array(
+            'button' => 'Create',
+            'action' => site_url('pegawai/create_action_non_dprd'),
+    	    'nama_pegawai' => set_value('nama_pegawai'),
+            'tipe' => set_value('tipe'),
+            'jenis_jabatan' => set_value('jenis_jabatan'),
+            'allJab' => $this->Tbl_jabatan_model->get_all(),
+            'getTipe' => $this->Admin_model->getData('*','tipe_pegawai','','','')->result_array()
+	    );
+        $data['title']='Tambah Anggota';
+        $this->template->load('template','hrms/pegawai/tbl_non_dprd_form', $data);
+    }
+
     public function getJenis()
     {
         $jenis = $this->Admin_model->getData('id_jenis,jenis','jenis_pegawai','',['id_tipe' => $_POST['id_tipe']],'')->result_array();
@@ -64,6 +132,35 @@ class Pegawai extends CI_Controller
         echo json_encode($jenis);
     }
     
+    public function create_action_dprd() 
+    {
+        // $this->_rules();
+        $data = array(
+            'nama_pegawai' => $this->input->post('nama_pegawai',TRUE),
+            'nip' => $this->input->post('nip',TRUE),
+            'tipe' => $this->input->post('tipe',TRUE),
+            'id_partai' => $this->input->post('id_partai',TRUE),
+            'id_komisi' => $this->input->post('id_komisi',TRUE),
+            'id_badan' => $this->input->post('id_badan',TRUE),
+            'id_jabatan' => $this->input->post('jenis_jabatan',TRUE),
+        );
+        $this->Tbl_pegawai_model->insert($data);
+        $this->session->set_flashdata('message', 'Create Record Success 2');
+        redirect(site_url('index_dprd'));
+    }
+
+    public function create_action_non_dprd() 
+    {
+        // $this->_rules();
+        $data = array(
+            'nama_pegawai' => $this->input->post('nama_pegawai',TRUE),
+            'tipe' => $this->input->post('tipe',TRUE),
+            'id_jabatan' => $this->input->post('jenis_jabatan',TRUE),
+        );
+            $this->Tbl_pegawai_model->insert($data);
+            $this->session->set_flashdata('message', 'Create Record Success 2');
+            redirect(site_url('pegawai/index_dprd'));
+    }
     public function create_action() 
     {
         // $this->_rules();
@@ -93,7 +190,7 @@ class Pegawai extends CI_Controller
                 'nip' => $this->input->post('nip',TRUE),
                 'nia' => $this->input->post('nia',TRUE),
                 'tipe' => $this->input->post('tipe',TRUE),
-                'jenis_jabatan' => $this->input->post('jenis_jabatan',TRUE),
+                'id_jabatan' => $this->input->post('jenis_jabatan',TRUE),
                 'id_partai' => $this->input->post('id_partai',TRUE),
                 'id_komisi' => $this->input->post('id_komisi',TRUE),
                 'id_badan' => $this->input->post('id_badan',TRUE),

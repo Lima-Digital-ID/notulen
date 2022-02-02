@@ -47,7 +47,7 @@
                                <input type="text" class="form-control" name="nip" id="nip" placeholder="NIP" value="<?php echo $nip; ?>" />
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" hidden>
                             <label class="col-lg-3 control-label text-lg-right pt-2">
                                NIA
                             </label>
@@ -82,14 +82,14 @@
                                 if(isset($infoTtd)){
                                     $required = "";
                             ?>
-                            <img src="<?php echo base_url()."assets/images/upload-ttd/".$ttd ?>" alt="" width="150px">
+                            <img src="<?php echo base_url()."assets/images/upload-ttd/".$ttd ?>" alt="" width="200px">
                             <br>
                             <?php } ?>
                                 <?php echo isset($infoTtd) ? "<small style='color:red'>$infoTtd</small>" : "" ?>
                                 <input type="file" name="ttd" class="form-control" id="" <?=$required?>>
                             </div>
                         </div>
-                        <div class="form-group row" id="row_partai">
+                        <div class="form-group row" id="row_partai"hidden>
                             <label class="col-lg-3 control-label text-lg-right pt-2">
                                 Partai
                             </label>

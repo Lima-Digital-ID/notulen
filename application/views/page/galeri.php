@@ -30,7 +30,7 @@
                     <div  class="box bg-danger text-center">
                     <div class="text-center justify-center">
                                             <img style="width: 200px; height:250px; padding: 10px;" src="<?php echo base_url('assets/images/bukti_rapat/' . $g->file); ?>" alt="">
-                                            <h5 style="margin-left: 10px; margin-top: 12px;" class="text-white"><?= ucwords(str_replace('sidak','Tinjauan Lapangan', $this->uri->segment(3))); ?> : <?= ucwords($g->nama); ?></h5>
+                                            <h5 style="margin-left: 10px; margin-top: 12px;" class="text-white">Dokumentasi <?= ucwords(str_replace('sidak','Tinjauan Lapangan', $this->uri->segment(3))); ?> : <?= ucwords($g->nama); ?></h5>
                                             </div>
                     </div>
                     </div>

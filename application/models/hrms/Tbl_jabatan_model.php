@@ -7,7 +7,7 @@ class Tbl_jabatan_model extends CI_Model
 {
 
     public $table = 'tbl_jabatan';
-    public $id = 'id_jabatan';
+    public $id = 'id';
     public $order = 'DESC';
 
     function __construct()
@@ -50,10 +50,10 @@ class Tbl_jabatan_model extends CI_Model
     }
     
     function json(){
-        $this->datatables->select('nama_jabatan, id_jabatan, dtm_crt, dtm_upd');
+        $this->datatables->select('jabatan, id');
         $this->datatables->from('tbl_jabatan');
-        $this->datatables->add_column('action', anchor(site_url('hrms/jabatan/update/$1'),'<i class="fa fa-edit" aria-hidden="true"></i>','class="btn btn-success btn-sm"')." 
-                ".anchor(site_url('hrms/jabatan/delete/$1'),'<i class="fa fa-trash" aria-hidden="true"></i>','class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_jabatan');
+        $this->datatables->add_column('action', anchor(site_url('jabatan/update/$1'),'<i class="fa fa-edit" aria-hidden="true"></i>','class="btn btn-success btn-sm"')." 
+                ".anchor(site_url('jabatan/delete/$1'),'<i class="fa fa-trash" aria-hidden="true"></i>','class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
             
         return $this->datatables->generate();
     }

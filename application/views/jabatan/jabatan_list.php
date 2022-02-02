@@ -5,7 +5,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Anggota</li>
+                        <li class="breadcrumb-item active" aria-current="page">User</li>
                     </ol>
                 </nav>
             </div>
@@ -26,28 +26,20 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header"><?= $title ?></div>
+                <div class="card-header">Data Jabatan</div>
                 <div class="card-body">
-                    <?php 
-                        if($_SESSION['role']==1){
-                    ?>
-                    <a href="<?=base_url('pegawai/create')?>"><button class="btn-primary btn btn-md">Tambah</button></a>
-                    <br><br>
+                    <?php if($this->session->userdata('role') == 1) { ?>
+                        <a href="<?=base_url('jabatan/create')?>"><button class="btn-primary btn btn-md">Tambah</button></a>
                     <?php } ?>
+                    <br><br>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped" id="pegawai_list">
                             <thead>
                                 <tr>
-                                    <th>Nama</th>
-                                    <th>Kategori</th>
-                                    <th>Fraksi</th>
-                                    <th>Komisi</th>
-                                    <th>Badan</th>
+                                    <th width="30px">No</th>
                                     <th>Jabatan</th>
-                                    <?php 
-                                        if($_SESSION['role']==1){
-                                    ?>
-                                    <th width="150px">Action</th>
+                                    <?php if($this->session->userdata('role') == 1) { ?>
+                                        <th width="150px">Action</th>
                                     <?php } ?>
                                 </tr>
                             </thead>
@@ -66,21 +58,15 @@
             "processing": true,
             "serverSide": true,
             "ajax": {
-                "url": "<?=base_url('pegawai/json')?>",
-                "type": "POST",
-                "data" : {tipe : "<?= $_GET['tipe'] ?>"}
+                "url": "<?=base_url('jabatan/json')?>",
+                "type": "POST"
             },
             columns: [
-                {"data": "nama_pegawai"},
-                {"data": "tipe", "class" : "text-center", "render": function(data, type, row){
-                    return getKategori(row.tipe);
-                }},
-                {"data": "nama_partai"},
-                {"data": "nama_komisi"},
-                {"data": "nama_badan"},
-                <?php 
-                    if($_SESSION['role']==1){
-                ?>
+                {
+                    "data": "id",
+                    "orderable": false
+                },{"data": "jabatan"},
+                <?php if($this->session->userdata('role') == 1) { ?>
                 {
                     "data" : "action",
                     "orderable": false,
@@ -94,14 +80,5 @@
     function formatDate(date) {
       var temp=date.split(/[.,\/ -]/);
       return temp[2] + '-' + temp[1] + '-' + temp[0];
-    }
-    function getKategori(val){
-        if(val == 1){
-            return 'Anggota Dewan'
-        }else if(val == 2){
-            return 'Forkopimda'
-        }else{
-            return 'Sekretaris Dewan'
-        }
     }
 </script>

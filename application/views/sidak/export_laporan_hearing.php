@@ -46,9 +46,9 @@ function formatBulan($date){
             </td>
             <td width="16">
             </td>
-            <td width="214">
+            <!-- <td width="214">
                 <p>Kepada :</p>
-            </td>
+            </td> -->
         </tr>
         <tr>
             <td width="88">
@@ -68,9 +68,9 @@ function formatBulan($date){
             </td>
         </tr>
         <tr>
-            <td width="88">
+            <!-- <td width="88">
                 <p>Lampiran</p>
-            </td>
+            </td> -->
             <td width="23">
                 <p>:</p>
             </td>
