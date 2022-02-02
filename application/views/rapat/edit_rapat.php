@@ -24,6 +24,10 @@
                     <h4 class="card-title">Tambah</h4>
                     <form class="mt-4" action="<?=base_url('rapat/update')?>" method="post" id="form_add" autocomplete="off" enctype="multipart/form-data">
                     <input type="hidden" name="id_rapat" value="<?= $rapat->id ?>">
+                        <div class="form-group" id="nomorRapat">
+                            <label for="">Nomor Rapat</label>
+                            <input type="text" value="<?= $rapat->nomor ?>"  class="form-control" readonly>
+                        </div>           
                         <div class="form-group">
                             <label for="exampleInputEmail1">Judul</label>
                             <input type="text" class="form-control" id="title" name="title" value="<?= $rapat->title ?>" required autofocus>
@@ -36,13 +40,27 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Tanggal</label>
-                                    <input type="text" class="form-control" id="tanggal" name="tanggal" placeholder="dd/mm/yyyy" value="<?= $rapat->tanggal ?>" >
+                                    <input type="text" class="form-control tanggal" id="tanggal" name="tanggal" placeholder="dd/mm/yyyy" value="<?= $rapat->tanggal ?>" >
                                 </div> 
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Waktu</label>
-                                    <input type="text" id="waktu" class="form-control" value="<?= $rapat->waktu ?>" name="waktu" >
+                                    <input type="text" id="waktu" class="form-control waktu" value="<?= $rapat->waktu ?>" name="waktu" >
+                                </div>   
+                            </div>
+                        </div>         
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Tanggal Selesai</label>
+                                    <input type="text" class="form-control tanggal" id="tanggalSelesai" name="tanggal_selesai" placeholder="dd/mm/yyyy" value="<?= $rapat->tanggal_selesai ?>" >
+                                </div> 
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Waktu Selesai</label>
+                                    <input type="text" id="waktuSelesai" class="waktu form-control" name="waktu_selesai"  value="<?= $rapat->waktu_selesai ?>">
                                 </div>   
                             </div>
                         </div>          
@@ -87,10 +105,6 @@
                                 </div>
                             </div>
                         </div>             
-                        <div class="form-group" id="nomorRapat">
-                            <label for="">Nomor Rapat</label>
-                            <input type="text" name="event" value="<?= $rapat->event ?>"  class="form-control">
-                        </div>           
                         <div class="form-group" id="nomorRapat">
                             <label for="">Lampiran</label>
                             <textarea name="lampiran" id="ckeditor" cols="50" rows="15" class="ckeditor">
@@ -137,7 +151,7 @@
 <script src="<?=base_url('assets/')?>theme/assets/libs/ckeditor/ckeditor.js"></script>
 <script src="<?=base_url('assets/')?>theme/assets/libs/ckeditor/samples/js/sample.js"></script>
 <script>
-$('#tanggal').datepicker({
+$('.tanggal').datepicker({
         format: 'dd-mm-yyyy',
         autoclose: true,
         todayHighlight: true
@@ -290,7 +304,7 @@ function sekwanOption(){
         }
     });
 }
-$('#waktu').datetimepicker({
+$('.waktu').datetimepicker({
     format: 'HH:mm',
     useCurrent: false,
     showTodayButton: true,

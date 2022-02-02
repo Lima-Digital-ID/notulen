@@ -23,6 +23,11 @@
                 <div class="card-body">
                     <h4 class="card-title">Tambah</h4>
                     <form class="mt-4" action="<?=base_url('rapat/save_rapat')?>" method="post" id="form_add" autocomplete="off" enctype="multipart/form-data">
+                        <div class="form-group" id="nomorRapat">
+                            <label for="">Nomor Rapat</label>
+                            <input type="text" name="nomor"  class="form-control" value="<?= $nomor ?>" readonly>
+                        </div>           
+
                         <div class="form-group">
                             <label for="exampleInputEmail1">Judul</label>
                             <input type="text" class="form-control" id="title" name="title" required autofocus>
@@ -35,13 +40,27 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Tanggal</label>
-                                    <input type="text" class="form-control" id="tanggal" name="tanggal" placeholder="dd/mm/yyyy" >
+                                    <input type="text" class="form-control tanggal" id="tanggal" name="tanggal" placeholder="dd/mm/yyyy" >
                                 </div> 
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Waktu</label>
-                                    <input type="text" id="waktu" class="form-control" name="waktu" >
+                                    <input type="text" id="waktu" class="waktu form-control" name="waktu" >
+                                </div>   
+                            </div>
+                        </div>          
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Tanggal Selesai</label>
+                                    <input type="text" class="form-control tanggal" id="tanggalSelesai" name="tanggal_selesai" placeholder="dd/mm/yyyy" >
+                                </div> 
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Waktu Selesai</label>
+                                    <input type="text" id="waktuSelesai" class="waktu form-control" name="waktu_selesai" >
                                 </div>   
                             </div>
                         </div>          
@@ -58,8 +77,8 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="">Jenis Rapat</label>
-                                    <select name="tipe" id="tipe" class="form-control select2" style="width:100%">
-                                    <option data-val="" data-sub="0" value="0">---Pilih Jenis---</option>
+                                    <select name="tipe" id="tipe" class="form-control select2" style="width:100%" required>
+                                    <option data-val="" data-sub="0" value="">---Pilih Jenis---</option>
                                     <?php 
                                             foreach ($menuRapat as $value) {
                                     ?>
@@ -80,10 +99,6 @@
                                 </div>
                             </div>
                         </div>             
-                        <div class="form-group" id="nomorRapat">
-                            <label for="">Nomor Rapat</label>
-                            <input type="text" name="event"  class="form-control">
-                        </div>           
                         <div class="form-group" id="nomorRapat">
                             <label for="">Lampiran</label>
                             <textarea name="lampiran" id="ckeditor" cols="50" rows="15" class="ckeditor"></textarea>
@@ -128,7 +143,7 @@
 <script src="<?=base_url('assets/')?>theme/assets/libs/ckeditor/ckeditor.js"></script>
 <script src="<?=base_url('assets/')?>theme/assets/libs/ckeditor/samples/js/sample.js"></script>
 <script>
-$('#tanggal').datepicker({
+$('.tanggal').datepicker({
         format: 'dd-mm-yyyy',
         autoclose: true,
         todayHighlight: true
@@ -175,8 +190,17 @@ $(document).ready(function(){
       var sub = $(this).val()
       var dataTipe = $("#tipe").find(':selected').data('val')
       var dataSub = $(this).find(':selected').data('val')
-
     })
+    <?php 
+        if(isset($_GET['tipe'])){
+    ?>
+    $("#tipe").val('<?= $_GET['tipe'] ?>').trigger('change')
+    <?php } ?>
+    <?php 
+        if(isset($_GET['sub'])){
+    ?>
+    $("#sub").val('<?= $_GET['sub'] ?>').trigger('change')
+    <?php } ?>
     $("form#form_forkopimda").on("submit", function( event ) {
         event.preventDefault();
         var response_data=null;
@@ -259,7 +283,7 @@ function sekwanOption(){
         }
     });
 }
-$('#waktu').datetimepicker({
+$('.waktu').datetimepicker({
     format: 'HH:mm',
     useCurrent: false,
     showTodayButton: true,

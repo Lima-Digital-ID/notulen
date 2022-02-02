@@ -72,7 +72,7 @@ body{
                 <p>:</p>
             </td>
             <td width="252">
-                <p><?php echo sprintf("%03s", $this->uri->segment(3)) ?> / &nbsp;&nbsp;&nbsp;Audiensi /<?php echo bln(date('n')) ?>/ <?php echo date('Y') ?></p>
+                <p><?php echo $row_rapat->nomor ?></p>
             </td>
             <td width="16">
             </td>
@@ -88,7 +88,7 @@ body{
                 <p>:</p>
             </td>
             <td width="252">
-                <p>Biasa</p>
+                <p><?= $row_rapat->sifat=='0' ? 'Tertutup' : 'Terbuka' ?></p>
             </td>
             <td width="16">
                 <p>&nbsp;</p>
@@ -214,11 +214,18 @@ body{
                     <p>:</p>
                 </td>
                 <td width="454">
-                    <?php foreach($anggota_rapat as $row){
-                    ?>
-                    <p>-&nbsp; <?=$row->nama_pegawai?> <?=$row->jabatan ? '( '.$row->jabatan.' )' : ''?> </p>
-                    <?php
-                    }
+                    <?php 
+                        foreach ($tipe_pegawai as $key => $value) {
+                            $this->db->select('nama_pegawai');
+                            $this->db->join("anggota_rapat ar","tp.id_pegawai=ar.id_pegawai");
+                            $anggota_rapat = $this->db->get_where("tbl_pegawai tp",['ar.id_rapat' => $id_rapat,'tp.tipe' => $value->id_tipe])->result();
+                            echo "<p style='margin-bottom:5px'>".$value->tipe."</p>";
+
+                            foreach ($anggota_rapat as $i => $v) {
+                                echo "<span style='margin-left:10px'>- ".$v->nama_pegawai."</span><br>";
+                            }
+                            echo "<br>";
+                        }
                     ?>
                 </td>
             </tr>
@@ -268,7 +275,7 @@ body{
             <tr>
                 <td></td>
                 <td align="center">
-                    <img src="<?php echo base_url()."assets/images/upload-ttd/".$sekretaris['ttd'] ?>" alt="" width="200" height='200'>
+                    <img src="<?php echo base_url()."assets/images/upload-ttd/".$sekretaris['ttd'] ?>" alt="" width="150">
                     <p><strong><u><?php echo strtoupper($sekretaris['nama_pegawai']) ?></u></strong></p>
                     <p>NIP. <?php echo $sekretaris['nip'] ?></p>
                 </td>

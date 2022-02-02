@@ -25,11 +25,19 @@ class Absensi extends CI_Controller {
 			'tipe' => $tipe
 		);
 		if(empty($_GET['id_tipe'])){
+			$this->db->select('title');
+			$data['rapat'] = $this->db->get_where("rapat",['id' => $_GET['id_rapat']])->row();
 			$this->template->load('template', 'absensi/pilih-absensi', $data);
 		}
 		else{
 			$this->template->load('template', 'absensi/absensi', $data);
 		}
+	}
+	public function get_peserta()
+	{
+		$peserta = $this->db->query("SELECT ar.id, ar.id_rapat, ar.keterangan, tp.id_pegawai, tp.tipe, tp.nama_pegawai, ar.status, ar.jabatan,(SELECT count(*) ttl FROM absensi_rapat abs WHERE abs.id_pegawai=ar.id_pegawai and id_rapat = '$_GET[id_rapat]') status_absen FROM anggota_rapat as ar JOIN tbl_pegawai as tp ON tp.id_pegawai=ar.id_pegawai WHERE id_rapat='$_GET[id_rapat]' and tp.tipe = '$_GET[id_tipe]' ")->result(); 	
+
+		echo json_encode($peserta);
 	}
 	public function kunjungan_harian_json()
 	{
@@ -144,7 +152,8 @@ class Absensi extends CI_Controller {
 			$this->db->insert('absensi_rapat', $update);
 		}
 		*/	
-		redirect('absensi?showModal=true&idRapat='.$select['id_rapat']."&id_tipe=".$_POST['id_tipe']);
+		$url = isset($_POST['from']) && $_POST['from']=='rapat' ? "id_rapat=".$select['id_rapat']."&showModal=true&tipe=".$_POST['id_tipe'] : "showModal=true&idRapat=".$select['id_rapat']."&id_tipe=".$_POST['id_tipe'];
+		redirect("absensi?$url");
 }
 	public function uploadkunjungan(){
 		$waktu=date('Y-m-d H:i:s');

@@ -70,7 +70,8 @@
         return $return;
     }
     function bln($bln){
-        $array_bln = array(1=>"I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
+        $bln = (int)$bln;
+        $array_bln = array("","I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
         $bln = $array_bln[$bln];
 
         return $bln;

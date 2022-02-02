@@ -171,7 +171,7 @@ $role_id=$this->session->userdata('role');
 
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-briefcase"></i><span class="hide-menu">Kunjungan </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                            <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('kunjungan')?>" aria-expanded="false"><i class="mdi mdi-album"></i><span class="hide-menu">Kunjungan All</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('kunjungan')?>" aria-expanded="false"><i class="mdi mdi-album"></i><span class="hide-menu">Kunjungan All</span></a></li>
 
                             <?php 
                                 $menuKunjungan = $this->Admin_model->menu(['is_kunjungan' => '1'])->result_array();
@@ -187,7 +187,7 @@ $role_id=$this->session->userdata('role');
 
                                     foreach ($subMenuKunjungan as $sub) {
                                 ?>
-                                    <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('kunjungan?jenis='.$value['id_menu'].'&sub='.$sub['id_sub_menu'])?>" aria-expanded="false"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"><?= $sub['sub_menu'] ?></span></a></li>
+                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('kunjungan?jenis='.$value['id_menu'].'&sub='.$sub['id_sub_menu'])?>" aria-expanded="false"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"><?= $sub['sub_menu'] ?></span></a></li>
                                 <?php  } ?>
                                 </ul>
                             </li>
@@ -195,7 +195,7 @@ $role_id=$this->session->userdata('role');
                                     }
                                     else{
                             ?>
-                            <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('kunjungan?jenis='.$value['id_menu'])?>" aria-expanded="false"><i class="mdi mdi-album"></i><span class="hide-menu">Kunjungan <?= $value['menu'] ?></span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('kunjungan?jenis='.$value['id_menu'])?>" aria-expanded="false"><i class="mdi mdi-album"></i><span class="hide-menu">Kunjungan <?= $value['menu'] ?></span></a></li>
                             <?php } }  ?>
                                 
                              
@@ -204,7 +204,7 @@ $role_id=$this->session->userdata('role');
 
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-incognito"></i><span class="hide-menu">Tinjauan Lapangan </span></a>
                         <ul aria-expanded="false" class="collapse  first-level">
-                            <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('sidak')?>" aria-expanded="false"><i class="mdi mdi-album"></i><span class="hide-menu">Tinjauan Lapangan All</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('sidak')?>" aria-expanded="false"><i class="mdi mdi-album"></i><span class="hide-menu">Tinjauan Lapangan All</span></a></li>
 
                             <?php 
                                 $menuTinjauan = $this->Admin_model->menu(['is_tinjauan' => '1'])->result_array();
@@ -219,7 +219,7 @@ $role_id=$this->session->userdata('role');
                                     $subMenuTinjauan = $this->Admin_model->submenu(['is_tinjauan' => '1','id_menu' => $value['id_menu']])->result_array();
                                         foreach ($subMenuTinjauan as $sub) {
                                 ?>
-                                    <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('sidak?jenis='.$value['id_menu'].'&sub='.$sub['id_sub_menu'])?>" aria-expanded="false"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"><?= $sub['sub_menu'] ?></span></a></li>
+                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('sidak?jenis='.$value['id_menu'].'&sub='.$sub['id_sub_menu'])?>" aria-expanded="false"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"><?= $sub['sub_menu'] ?></span></a></li>
                                 <?php }  ?>
                                 </ul>
                             </li>
@@ -227,7 +227,7 @@ $role_id=$this->session->userdata('role');
                                     }
                                     else{
                             ?>
-                            <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('sidak?jenis='.$value['id_menu'])?>" aria-expanded="false"><i class="mdi mdi-album"></i><span class="hide-menu"><?= $value['menu'] ?></span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('sidak?jenis='.$value['id_menu'])?>" aria-expanded="false"><i class="mdi mdi-album"></i><span class="hide-menu"><?= $value['menu'] ?></span></a></li>
                             <?php } }  ?>
                                 
                              
@@ -238,17 +238,17 @@ $role_id=$this->session->userdata('role');
                         <!-- <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-folder-image"></i><span class="hide-menu">Galeri </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
 
-                                <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('Welcome/galery')?>" aria-expanded="false"><i class="mdi mdi-folder-image""></i><span class="hide-menu">ALL</span></a></li>
-                                <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('Welcome/galery_rapat')?>" aria-expanded="false"><i class="mdi mdi-folder-image"></i><span class="hide-menu">Galeri Rapat</span></a></li>
-                                <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('Welcome/galery_kunjungan')?>" aria-expanded="false"><i class="mdi mdi-folder-image"></i><span class="hide-menu">Galeri Kunjungan</span></a></li>
-                                <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('Welcome/galery_sidak')?>" aria-expanded="false"><i class="mdi mdi-folder-image"></i><span class="hide-menu">Galeri Sidak</span></a></li>
+                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('Welcome/galery')?>" aria-expanded="false"><i class="mdi mdi-folder-image""></i><span class="hide-menu">ALL</span></a></li>
+                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('Welcome/galery_rapat')?>" aria-expanded="false"><i class="mdi mdi-folder-image"></i><span class="hide-menu">Galeri Rapat</span></a></li>
+                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('Welcome/galery_kunjungan')?>" aria-expanded="false"><i class="mdi mdi-folder-image"></i><span class="hide-menu">Galeri Kunjungan</span></a></li>
+                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('Welcome/galery_sidak')?>" aria-expanded="false"><i class="mdi mdi-folder-image"></i><span class="hide-menu">Galeri Sidak</span></a></li>
                                 
                                
                             </ul>
                         </li> -->
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Rapat </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                            <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('rapat')?>" aria-expanded="false"><i class="mdi mdi-album"></i><span class="hide-menu">Rapat All</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('rapat')?>" aria-expanded="false"><i class="mdi mdi-album"></i><span class="hide-menu">Rapat All</span></a></li>
                             <?php 
                                 $menuRapat = $this->Admin_model->menu(['is_rapat' => '1'])->result_array();
                                 foreach ($menuRapat as $value) {
@@ -260,7 +260,7 @@ $role_id=$this->session->userdata('role');
                                 <?php 
                                     foreach ($subMenuRapat as $sub) {
                                 ?>
-                                    <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('rapat?tipe='.$value['id_menu'].'&sub='.$sub['id_sub_menu'])?>" aria-expanded="false"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"><?= $sub['sub_menu'] ?></span></a></li>
+                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('rapat?tipe='.$value['id_menu'].'&sub='.$sub['id_sub_menu'])?>" aria-expanded="false"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"><?= $sub['sub_menu'] ?></span></a></li>
                                 <?php } ?>
                                 </ul>
                             </li>
@@ -268,7 +268,7 @@ $role_id=$this->session->userdata('role');
                                     }
                                     else{
                             ?>
-                            <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('rapat?tipe='.$value['id_menu'])?>" aria-expanded="false"><i class="mdi mdi-album"></i><span class="hide-menu">Rapat <?= $value['menu'] ?></span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('rapat?tipe='.$value['id_menu'])?>" aria-expanded="false"><i class="mdi mdi-album"></i><span class="hide-menu">Rapat <?= $value['menu'] ?></span></a></li>
                             <?php } } ?>
                             </ul>
                         </li>
@@ -278,7 +278,7 @@ $role_id=$this->session->userdata('role');
                                     $getTipe = $this->Admin_model->getData('*','tipe_pegawai','','','')->result_array();
                                     foreach ($getTipe as $key => $value) {
                                 ?>
-                                <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('absensi?id_tipe='.$value['id_tipe'])?>" aria-expanded="false"><i class="mdi mdi-album"></i><span class="hide-menu"><?= $value['tipe'] ?></span></a></li>
+                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('absensi?id_tipe='.$value['id_tipe'])?>" aria-expanded="false"><i class="mdi mdi-album"></i><span class="hide-menu"><?= $value['tipe'] ?></span></a></li>
                                 <?php } ?>
                             </ul>
                         </li>
@@ -289,13 +289,13 @@ $role_id=$this->session->userdata('role');
                                     $getTipePegawai = $this->Admin_model->getData('*','tipe_pegawai','','','')->result_array();
                                     foreach ($getTipePegawai as $key => $value) {
                                     ?>
-                                        <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('pegawai?tipe='.$value['id_tipe'])?>" aria-expanded="false"><i class="mdi mdi-album"></i><span class="hide-menu"><?= $value['tipe'] ?></span></a></li>
+                                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('pegawai?tipe='.$value['id_tipe'])?>" aria-expanded="false"><i class="mdi mdi-album"></i><span class="hide-menu"><?= $value['tipe'] ?></span></a></li>
                                     <?php
                                     }
                                 ?>
                             </ul>
                         </li>
-                        <li class="sidebar-item" <?=$role_id != 1 ? 'hidden' : ''?> > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('user')?>" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">User</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?=base_url('user')?>" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">User</span></a></li>
                        
                         <li hidden class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-tune-vertical"></i><span class="hide-menu">Sidebar Type </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">

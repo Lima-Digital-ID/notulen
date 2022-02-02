@@ -98,7 +98,7 @@
                                 if(isset($infoTtd)){
                                     $required = "";
                             ?>
-                            <img src="<?php echo base_url()."assets/images/upload-ttd/".$ttd ?>" alt="" width="200px">
+                            <img src="<?php echo base_url()."assets/images/upload-ttd/".$ttd ?>" alt="" width="150px">
                             <br>
                             <?php } ?>
                                 <?php echo isset($infoTtd) ? "<small style='color:red'>$infoTtd</small>" : "" ?>

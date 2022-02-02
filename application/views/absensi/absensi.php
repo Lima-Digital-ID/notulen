@@ -107,39 +107,6 @@ foreach ($db as $a) : ?>
         </div>
     </div>
 <?php endforeach; ?>
-<!-- <div id="modalAddForkopimda" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Tambah Forkopimda</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <form action="<?= base_url('absensi/upload') ?>" method="post" id="form_absen">
-                <div class="modal-body">
-                    <input type="hidden" id="id" name="id">
-                    <input type="hidden" name="id_tipe" value="<?= $_GET['id_tipe'] ?>">
-                    <p id="demo"></p>
-                    <div id="my_camera"></div>
-                    <input type=button value="Configure" onClick="configure()">
-                    <input type=button value="Take Snapshot" onClick="take_snapshot()">
-                    <!-- <input type=button value="Save Snapshot" onClick="saveSnap()"> -->
-
-<!--                     <div id="results"></div>
-
-                    <input type="hidden" name="longitude" id="longitude">
-                    <input type="hidden" name="latitude" id="latitude">
-                    <input type="hidden" name="file_absen" id="file_absen">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" onclick="checkSubmited()" class="btn btn-success waves-effect">Simpan</button>
-                    <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
- -->
  <div id="modalAddForkopimda2" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

@@ -55,8 +55,7 @@ body{
         <tr>    
             <td><img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Lambang_Kota_Blitar.png" alt="" width="110" height="100"/>
             <td align="center">
-                <span style="font-size:18px"><strong>DEWAN PERWAKILAN RAKYAT DAERAH<br>
-                KOTA&nbsp; BLITAR</strong></span><br>
+                <span style="font-size:18px"><strong>SEKRETARIAT DEWAN KOTA BLITAR 
                 <span style="font-size:18px">JL. A. Yani No. 19 Telp. (0342) 801602</span><br>
                 Situs web : http://setwan.blitarkota.go.id e-mail : setwan@blitarkota.go.id<br>
                 <span style="font-size:18px"><strong>B L I T A R</strong></span>
@@ -204,7 +203,7 @@ body{
             <tr>
                 <td></td>
                 <td align="center">
-                    <img src="<?php echo base_url()."assets/images/upload-ttd/".$sekretaris['ttd'] ?>" alt="" width="200" height='200'>
+                    <img src="<?php echo base_url()."assets/images/upload-ttd/".$sekretaris['ttd'] ?>" alt="" width="150">
                     <p><strong><u><?php echo strtoupper($sekretaris['nama_pegawai']) ?></u></strong></p>
                     <p>NIP. <?php echo $sekretaris['nip'] ?></p>
                 </td>

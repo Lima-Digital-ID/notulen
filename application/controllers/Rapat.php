@@ -187,12 +187,6 @@ class Rapat extends CI_Controller {
 		echo $this->Admin_model->rapat_json_hearing();
 	}
 
-
-
-
-
-
-
 	public function rapat_json(){
 		header('Content-Type: application/json');
 		$tipe = isset($_GET['tipe']) ? $_GET['tipe'] : '';
@@ -209,9 +203,24 @@ class Rapat extends CI_Controller {
 	}
 	public function add_rapat()
 	{
+		$this->db->select("nomor");		
+		$this->db->order_by("id","desc");		
+		$this->db->limit(1);		
+		$getLastNo = $this->db->get_where("rapat",["YEAR(created_at)" => date('Y'),"MONTH(created_at)" => date('m')]);
+		if($getLastNo->num_rows()==0){
+			$no = 1;
+		}
+		else{
+			$nomor = $getLastNo->row()->nomor;
+			$ex = explode("/",$nomor);
+			$no = (int)$ex[0];
+			$no++;
+		}
+		$nomor = sprintf("%03s",$no)."/Audiensi/".bln(date('n'))."/".date("Y");
 		$data=array(
 			'title'	=> 'Tambah Rapat',
 			'menuRapat' => $this->Admin_model->menu(['is_rapat' => '1'])->result_array(),
+			"nomor" => $nomor
 		);
 		$this->template->load('template', 'rapat/add_rapat', $data);
     }
@@ -238,8 +247,11 @@ class Rapat extends CI_Controller {
             'tempat'        =>$this->input->post('tempat'),
             'tanggal'       => $this->formatDate($this->input->post('tanggal')),
             'waktu'     =>$this->input->post('waktu'),
+            'tanggal_selesai'       => $this->formatDate($this->input->post('tanggal_selesai')),
+            'waktu_selesai'     =>$this->input->post('waktu_selesai'),
             'tipe'      =>$this->input->post('tipe'),
             'sifat'     =>$this->input->post('sifat'),
+            'nomor'     =>$this->input->post('nomor'),
             'event'     => empty($this->input->post('event')) ? "" : $this->input->post('event'),
             'lampiran'     =>$this->input->post('lampiran'),
 		);
@@ -307,7 +319,7 @@ class Rapat extends CI_Controller {
 			);
 			$this->Admin_model->insert_table('galery_rapat', $data);
 		}
-		redirect('absensi');
+		redirect("absensi?id_rapat=$id");
     }
 	function update(){
 		$id = $this->input->post('id_rapat');
@@ -315,9 +327,12 @@ class Rapat extends CI_Controller {
             'title'     =>$this->input->post('title'),
             'tempat'        =>$this->input->post('tempat'),
             'tanggal'       => $this->formatDate($this->input->post('tanggal')),
+            'tanggal_selesai'       => $this->formatDate($this->input->post('tanggal_selesai')),
+            'waktu_selesai'     =>$this->input->post('waktu_selesai'),
             'waktu'     =>$this->input->post('waktu'),
             'tipe'      =>$this->input->post('tipe'),
             'sifat'     =>$this->input->post('sifat'),
+            'nomor'     =>$this->input->post('nomor'),
             'event'     => empty($this->input->post('event')) ? "" : $this->input->post('event'),
             'lampiran'     =>$this->input->post('lampiran'),
 		);
@@ -346,8 +361,7 @@ class Rapat extends CI_Controller {
 			'jabatan_rapat' => 4
 		);
 		$this->Admin_model->insert_table('anggota_rapat', $sekretaris);
-		redirect('absensi');
-
+		redirect("absensi?id_rapat=$id");
 	}
     private function formatDate($date){
         $date=date('Y-m-d', strtotime($date));
@@ -518,12 +532,16 @@ class Rapat extends CI_Controller {
 		}
 
 		$row_rapat = $this->Admin_model->get_table_by_id('rapat', $id);
-		$anggota_rapat = $this->Admin_model->anggota_rapat_order_jabatan($id);
+		// $anggota_rapat = $this->Admin_model->anggota_rapat_order_jabatan($id);
+		$this->db->order_by("urutan","desc");
+		$tipePegawai = $this->db->get("tipe_pegawai")->result();
 		$data = array(
 			'row_rapat' => $row_rapat,
-			'anggota_rapat' => $anggota_rapat,
+			'tipe_pegawai' => $tipePegawai,
+			// 'anggota_rapat' => $anggota_rapat,
 			'sekretaris' => $this->Admin_model->getSekretarisRapat($id)->result_array()[0],
 			'galery' => $this->Admin_model->galery_rapat($id),
+			'id_rapat' => $id,
 		);
 		// echo json_encode($anggota_rapat);
        $this->load->view('rapat/export_rapat_bamus', $data);

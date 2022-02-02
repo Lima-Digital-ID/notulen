@@ -28,9 +28,12 @@
             <div class="card">
                 <div class="card-header"><?= $title ?></div>
                 <div class="card-body">
+                    <?php 
+                        if($_SESSION['role']==1){
+                    ?>
                     <a href="<?=base_url('pegawai/create')?>"><button class="btn-primary btn btn-md">Tambah</button></a>
-                    <?php echo anchor(site_url('pegawai/import_excel'), '<i class="fa fa-upload" aria-hidden="true"></i> Import Pegawai', 'class="hide btn btn-success"'); ?>
                     <br><br>
+                    <?php } ?>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped" id="pegawai_list">
                             <thead>
@@ -40,7 +43,11 @@
                                     <th>Partai</th>
                                     <th>Komisi</th>
                                     <th>Badan</th>
+                                    <?php 
+                                        if($_SESSION['role']==1){
+                                    ?>
                                     <th width="150px">Action</th>
+                                    <?php } ?>
                                 </tr>
                             </thead>
                         
@@ -70,11 +77,15 @@
                 {"data": "nama_partai"},
                 {"data": "nama_komisi"},
                 {"data": "nama_badan"},
+                <?php 
+                    if($_SESSION['role']==1){
+                ?>
                 {
                     "data" : "action",
                     "orderable": false,
                     "className" : "text-center"
                 }
+                <?php } ?>
             ],
             order: [[0, 'desc']],
         } );

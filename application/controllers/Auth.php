@@ -4,11 +4,12 @@ Class Auth extends CI_Controller{
     function index(){
         if(!empty($this->session->userdata('id'))){
             $role=$this->session->userdata('role');
-            if($role == 1){
-                redirect('rapat');
-            }else{
-                redirect('absensi');
-            }
+            // if($role == 1){
+            //     redirect('rapat');
+            // }else{
+            //     redirect('absensi');
+            // }
+                redirect('welcome/dashboard');
             
         }else{
             $this->session->set_flashdata('status_login','anda belum login');

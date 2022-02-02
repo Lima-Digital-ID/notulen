@@ -231,7 +231,7 @@ body{
             <tr>
                 <td></td>
                 <td align="center">
-                    <img src="<?php echo base_url()."assets/images/upload-ttd/".$sekretaris['ttd'] ?>" alt="" width="200" height='200'>
+                    <img src="<?php echo base_url()."assets/images/upload-ttd/".$sekretaris['ttd'] ?>" alt="" width="150">
                     <p><strong><u><?php echo strtoupper($sekretaris['nama_pegawai']) ?></u></strong></p>
                     <p>NIP. <?php echo $sekretaris['nip'] ?></p>
                 </td>

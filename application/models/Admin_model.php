@@ -273,9 +273,9 @@ class Admin_model extends CI_Model
         return $data;
     }
     function rapat_json($tipe,$sub){
-        $this->datatables->select('id, tanggal, waktu, title, event, tipe, sifat, tempat, is_edit, created_at, updated_at');
-        $this->datatables->from('rapat');
-        $this->datatables->where('deleted_at', null);
+        $this->datatables->select("id, tanggal, waktu, title, event, tipe, sifat, tempat, is_edit, created_at, updated_at,(select count(*) ttl from anggota_rapat where id_rapat = r.id) ttl_anggota, (select count(*) ttl from absensi_rapat where id_rapat = r.id) ttl_absen");
+        $this->datatables->from('rapat r');
+        // $this->datatables->where('deleted_at', null);
         if($tipe!=""){
             $this->datatables->where('tipe',$tipe);
         }
@@ -878,14 +878,14 @@ class Admin_model extends CI_Model
     {
         $this->db->select('id');
         $this->db->where('tipe',$tipe);
-        $this->db->where('year(tanggal)', date('Y'));
+        // $this->db->where('year(tanggal)', date('Y'));
         return $this->db->get('rapat')->num_rows();
     }
     public function countSubJenisRapat($sub)
     {
         $this->db->select('id');
         $this->db->where('sub_tipe_komisi',$sub);
-        $this->db->where('year(tanggal)', date('Y'));
+        // $this->db->where('year(tanggal)', date('Y'));
         return $this->db->get('rapat')->num_rows();
     }
     public function countAbsensiRapat($tipe)
@@ -893,7 +893,7 @@ class Admin_model extends CI_Model
         $this->db->select('a.id');
         $this->db->join('rapat r','a.id_rapat = r.id');
         $this->db->where('r.tipe',$tipe);
-        $this->db->where('year(r.tanggal)', date('Y'));
+        // $this->db->where('year(r.tanggal)', date('Y'));
         return $this->db->get('absensi_rapat a')->num_rows();
     }
     public function countAbsensiRapatBySub($sub)
@@ -901,7 +901,7 @@ class Admin_model extends CI_Model
         $this->db->select('a.id');
         $this->db->join('rapat r','a.id_rapat = r.id');
         $this->db->where('r.sub_tipe_komisi',$sub);
-        $this->db->where('year(r.tanggal)', date('Y'));
+        // $this->db->where('year(r.tanggal)', date('Y'));
         return $this->db->get('absensi_rapat a')->num_rows();
     }
     public function countJenisKunjungan($jenis)
@@ -909,7 +909,7 @@ class Admin_model extends CI_Model
         $this->db->select('id');
         $this->db->where('tipe_kunjungan !=',3);
         $this->db->where('jenis_kunjungan',$jenis);
-        $this->db->where('year(awal_waktu_pelaksanaan)', date('Y'));
+        // $this->db->where('year(awal_waktu_pelaksanaan)', date('Y'));
         return $this->db->get('kunjungan')->num_rows();
     }
     public function countSubJenisKunjungan($sub)
@@ -917,7 +917,7 @@ class Admin_model extends CI_Model
         $this->db->select('id');
         $this->db->where('tipe_kunjungan !=',3);
         $this->db->where('sub_jenis_kunjungan',$sub);
-        $this->db->where('year(awal_waktu_pelaksanaan)', date('Y'));
+        // $this->db->where('year(awal_waktu_pelaksanaan)', date('Y'));
         return $this->db->get('kunjungan')->num_rows();
     }
     public function countAbsensiKunjungan($jenis)
@@ -926,7 +926,7 @@ class Admin_model extends CI_Model
         $this->db->join('kunjungan k','a.id_kunjungan = k.id');
         $this->db->where('k.tipe_kunjungan !=',3);
         $this->db->where('k.jenis_kunjungan',$jenis);
-        $this->db->where('year(k.awal_waktu_pelaksanaan)', date('Y'));
+        // $this->db->where('year(k.awal_waktu_pelaksanaan)', date('Y'));
         return $this->db->get('absensi a')->num_rows();
     }
     public function countAbsensiKunjunganBySub($sub)
@@ -935,7 +935,7 @@ class Admin_model extends CI_Model
         $this->db->join('kunjungan k','a.id_kunjungan = k.id');
         $this->db->where('k.tipe_kunjungan !=',3);
         $this->db->where('k.sub_jenis_kunjungan',$sub);
-        $this->db->where('year(k.awal_waktu_pelaksanaan)', date('Y'));
+        // $this->db->where('year(k.awal_waktu_pelaksanaan)', date('Y'));
         return $this->db->get('absensi a')->num_rows();
     }
     public function countJenisSidak($jenis)
@@ -943,7 +943,7 @@ class Admin_model extends CI_Model
         $this->db->select('id');
         $this->db->where('tipe_kunjungan',3);
         $this->db->where('jenis_kunjungan',$jenis);
-        $this->db->where('year(awal_waktu_pelaksanaan)', date('Y'));
+        // $this->db->where('year(awal_waktu_pelaksanaan)', date('Y'));
         return $this->db->get('kunjungan')->num_rows();
     }
     public function countSubJenisSidak($sub)
@@ -951,7 +951,7 @@ class Admin_model extends CI_Model
         $this->db->select('id');
         $this->db->where('tipe_kunjungan',3);
         $this->db->where('sub_jenis_kunjungan',$sub);
-        $this->db->where('year(awal_waktu_pelaksanaan)', date('Y'));
+        // $this->db->where('year(awal_waktu_pelaksanaan)', date('Y'));
         return $this->db->get('kunjungan')->num_rows();
     }
     public function countAbsensiSidak($jenis)
@@ -960,7 +960,7 @@ class Admin_model extends CI_Model
         $this->db->join('kunjungan k','a.id_kunjungan = k.id');
         $this->db->where('k.tipe_kunjungan',3);
         $this->db->where('k.jenis_kunjungan',$jenis);
-        $this->db->where('year(k.awal_waktu_pelaksanaan)', date('Y'));
+        // $this->db->where('year(k.awal_waktu_pelaksanaan)', date('Y'));
         return $this->db->get('absensi a')->num_rows();
     }
     public function countAbsensiSidakBySub($sub)
@@ -969,7 +969,7 @@ class Admin_model extends CI_Model
         $this->db->join('kunjungan k','a.id_kunjungan = k.id');
         $this->db->where('k.tipe_kunjungan',3);
         $this->db->where('k.sub_jenis_kunjungan',$sub);
-        $this->db->where('year(k.awal_waktu_pelaksanaan)', date('Y'));
+        // $this->db->where('year(k.awal_waktu_pelaksanaan)', date('Y'));
         return $this->db->get('absensi a')->num_rows();
     }
     public function menu($where)
