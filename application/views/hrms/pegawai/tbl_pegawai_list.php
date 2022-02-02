@@ -68,7 +68,7 @@
             "ajax": {
                 "url": "<?=base_url('pegawai/json')?>",
                 "type": "POST",
-                "data" : {tipe : "<?= $_GET['tipe'] ?>"}
+                "data" : {id_tipe : "<?= $_GET['tipe'] ?>"}
             },
             columns: [
                 {"data": "nama_pegawai"},
