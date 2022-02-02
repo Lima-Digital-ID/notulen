@@ -95,15 +95,15 @@ Class Auth extends CI_Controller{
         
         if($user->num_rows() > 0){
             $this->session->set_userdata($user->row_array());
-            $role=$this->session->userdata('role');
-            if($role == 1){
-                redirect('rapat');
-            }else{
-                redirect('absensi');
-            }
+            // $role=$this->session->userdata('role');
+            // if($role == 1){
+            //     redirect('rapat');
+            // }else{
+            //     redirect('absensi');
+            // }
         }else{
             $this->session->set_flashdata('status_login','email atau password yang anda input salah');
-            redirect('auth');
+            redirect('welcome/dasboard');
         }
     }
     
