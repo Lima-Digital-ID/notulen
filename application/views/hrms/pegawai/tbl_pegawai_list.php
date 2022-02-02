@@ -78,12 +78,19 @@
                 {"data": "nama_partai"},
                 {"data": "nama_komisi"},
                 {"data": "nama_badan"},
-                {"render": function(url,data, type){
+                {"data": "id","render": function(data,type,row){
+                    var jabatan = ""
                     $.ajax({
-                        "url":"<?= base_url('pegawai/json_jabatan')?>",
-                        "type":"POST",
-                        "data":"jabatan"
+                        url:"<?= base_url('pegawai/json_jabatan')?>",
+                        type : "get",
+                        async : false,
+                        data : {id_pegawai : row.id_pegawai},
+                        success : function(res){
+                            jabatan = res
+                        }
                     })
+
+                    return jabatan
                 }},
                 <?php 
                     if($_SESSION['role']==1){

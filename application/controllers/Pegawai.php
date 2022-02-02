@@ -63,10 +63,10 @@ class Pegawai extends CI_Controller
         echo $this->Tbl_pegawai_model->json_dprd();
     }
 
-    public function json_jabatan() {
-        header('Content-Type: application/json');
-        echo $this->Tbl_pegawai_model->json_jabatan();
-    }
+    // public function json_jabatan() {
+    //     header('Content-Type: application/json');
+    //     echo $this->Tbl_pegawai_model->json_jabatan();
+    // }
 
     public function create() 
     {
@@ -494,6 +494,24 @@ class Pegawai extends CI_Controller
     
     function autocomplate(){
         autocomplate_json('tbl_pegawai', 'nama_pegawai');
+    }
+
+    public function json_jabatan()
+    {
+        $this->db->select('j.jabatan');
+        $this->db->join('tbl_jabatan j','jp.id_jabatan = j.id');
+        $sqlJabatan = $this->db->get_where('tbl_jabatan_pegawai jp',['jp.id_pegawai' => $_GET['id_pegawai']]);
+        $getJabatan = $sqlJabatan->result();
+        $countJabatan = $sqlJabatan->num_rows();
+
+        $jabatan = "";
+        foreach ($getJabatan as $key => $value) {
+            $key++;
+            $glue = $key==$countJabatan ?  ", " : '';
+            $jabatan.=$value->jabatan.$glue;
+        }
+
+        echo $jabatan;
     }
 
 }

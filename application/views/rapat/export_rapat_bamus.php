@@ -45,6 +45,11 @@ table td, table td * {
 body{
     font-size:12px
 }
+@media print{
+    .galery{
+        page-break-before : always;   
+    }
+}
 </style>
 <body class="page">
     <table style="height: 160px; width: 80%;">
@@ -98,9 +103,9 @@ body{
             </td>
         </tr>
         <tr>
-            <!-- <td width="88">
+            <td width="88">
                 <p>Lampiran</p>
-            </td> -->
+            </td>
             <td width="23">
                 <p>:</p>
             </td>
@@ -246,11 +251,6 @@ body{
         </tbody>
     </table>
     <br>
-    <?php 
-        foreach ($galery as $key => $value) {
-            echo "<img src='".base_url()."assets/images/bukti_rapat/".$value->file."' width='200' height='200'>";
-        }
-    ?>
     <p>&nbsp;</p>
     <table width="100%">
         <tbody>
@@ -258,12 +258,6 @@ body{
                 <td width="60%"></td>
                 <td align="center">
                     <p>Notulis Kegiatan</p>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <p>&nbsp;</p>
                 </td>
             </tr>
             <tr>
@@ -283,6 +277,13 @@ body{
         </tbody>
     </table>
     <p>&nbsp;</p>
+    <div class="galery">
+    <?php 
+        foreach ($galery as $key => $value) {
+            echo "<img style='margin-left:10px' src='".base_url()."assets/images/bukti_rapat/".$value->file."' width='200' height='200'>";
+        }
+    ?>
+    </div>
     <?php 
         if(!empty($this->uri->segment(4)) && $this->uri->segment(4)=='false'){
     ?>
