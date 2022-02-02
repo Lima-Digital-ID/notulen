@@ -71,7 +71,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row" hidden>
+                        <div class="form-group row">
                             <label class="col-lg-3 control-label text-lg-right pt-2">
                                 Upload Tanda Tangan
                             </label>
@@ -87,6 +87,23 @@
                             <?php } ?>
                                 <?php echo isset($infoTtd) ? "<small style='color:red'>$infoTtd</small>" : "" ?>
                                 <input type="file" name="ttd" class="form-control" id="" <?=$required?>>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 control-label text-lg-right pt-2">
+                                Jabatan
+                            </label>
+                            <div class="col-lg-6">
+                                <select name="id_jabatan[]" multiple="multiple"  class="form-control select2" style="width:100%" required  onchange="cekKategori()">
+                                    <!-- <option value="" <?=$tipe == '' ? 'selected' : ''?>>--Pilih Kategori--</option> -->
+                                    <!-- <option value="2">Sekretariat DPRD</option> -->
+                                    <?php 
+                                        foreach ($allJab as $key => $value) {
+                                            $selected  = $tipe==$value->id ? 'selected' : '';
+                                            echo "<option value='$value->id' $selected>$value->jabatan</option>";
+                                        }
+                                    ?>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row" id="row_partai">
@@ -123,23 +140,6 @@
                             </div>
                             <div class="col-lg-2">
                                 <button type="button" class="btn btn-primary btn-sm" data-target="#modalAddbadan" data-toggle="modal" style="margin-top:5px"><i class="fa fa-plus"></i></button>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 control-label text-lg-right pt-2">
-                                Jabatan
-                            </label>
-                            <div class="col-lg-6">
-                                <select name="jenis_jabatan" multiple="multiple"  class="form-control select2" style="width:100%" required  onchange="cekKategori()">
-                                    <!-- <option value="" <?=$tipe == '' ? 'selected' : ''?>>--Pilih Kategori--</option> -->
-                                    <!-- <option value="2">Sekretariat DPRD</option> -->
-                                    <?php 
-                                        foreach ($allJab as $key => $value) {
-                                            $selected  = $tipe==$value->id ? 'selected' : '';
-                                            echo "<option value='$value->id' $selected>$value->jabatan</option>";
-                                        }
-                                    ?>
-                                </select>
                             </div>
                         </div>
                         <div class="form-group row">

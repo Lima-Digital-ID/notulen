@@ -101,77 +101,12 @@ class Pegawai extends CI_Controller
         $this->template->load('template',"hrms/pegawai/$page", $data);
     }
 
-    public function create_dprd() 
-    {
-        $data = array(
-            'button' => 'Create',
-            'action' => site_url('pegawai/create_action_dprd'),
-    	    'id_pegawai' => set_value('id_pegawai'),
-    	    'nama_pegawai' => set_value('nama_pegawai'),
-            'nip' => set_value('nip'),
-            'nia' => set_value('-'),
-            'tipe' => set_value(0),
-            'id_partai' => set_value('id_partai'),
-            'id_komisi' => set_value('id_komisi'),
-            'id_badan' => set_value('id_badan'),
-            'jenis_jabatan' => set_value('jenis_jabatan'),
-            'allJab' => $this->Tbl_jabatan_model->get_all(),
-            'getTipe' => $this->Admin_model->getData('*','tipe_pegawai','','','')->result_array()
-	    );
-        $data['title']='Tambah Anggota';
-        $this->template->load('template','hrms/pegawai/tbl_dprd_form', $data);
-    }
-    
-    public function create_non_dprd() 
-    {
-        $data = array(
-            'button' => 'Create',
-            'action' => site_url('pegawai/create_action_non_dprd'),
-    	    'nama_pegawai' => set_value('nama_pegawai'),
-            'tipe' => set_value('tipe'),
-            'jenis_jabatan' => set_value('jenis_jabatan'),
-            'allJab' => $this->Tbl_jabatan_model->get_all(),
-            'getTipe' => $this->Admin_model->getData('*','tipe_pegawai','','','')->result_array()
-	    );
-        $data['title']='Tambah Anggota';
-        $this->template->load('template','hrms/pegawai/tbl_non_dprd_form', $data);
-    }
 
     public function getJenis()
     {
         $jenis = $this->Admin_model->getData('id_jenis,jenis','jenis_pegawai','',['id_tipe' => $_POST['id_tipe']],'')->result_array();
 
         echo json_encode($jenis);
-    }
-    
-    public function create_action_dprd() 
-    {
-        // $this->_rules();
-        $data = array(
-            'nama_pegawai' => $this->input->post('nama_pegawai',TRUE),
-            'nip' => $this->input->post('nip',TRUE),
-            'tipe' => $this->input->post('tipe',TRUE),
-            'id_partai' => $this->input->post('id_partai',TRUE),
-            'id_komisi' => $this->input->post('id_komisi',TRUE),
-            'id_badan' => $this->input->post('id_badan',TRUE),
-            'id_jabatan' => $this->input->post('jenis_jabatan',TRUE),
-        );
-        $this->Tbl_pegawai_model->insert($data);
-        $this->session->set_flashdata('message', 'Create Record Success 2');
-        redirect(site_url('index_dprd'));
-    }
-
-    public function create_action_non_dprd() 
-    {
-        // $this->_rules();
-        $data = array(
-            'nama_pegawai' => $this->input->post('nama_pegawai',TRUE),
-            'tipe' => $this->input->post('tipe',TRUE),
-            'id_jabatan' => $this->input->post('jenis_jabatan',TRUE),
-        );
-            $this->Tbl_pegawai_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success 2');
-            redirect(site_url('pegawai/index_dprd'));
     }
     public function create_action() 
     {
@@ -202,13 +137,21 @@ class Pegawai extends CI_Controller
                 'nip' => $this->input->post('nip',TRUE),
                 'nia' => $this->input->post('nia',TRUE),
                 'tipe' => $this->input->post('tipe',TRUE),
-                'id_jabatan' => $this->input->post('jenis_jabatan',TRUE),
+                // 'jenis_jabatan' => $this->input->post(0,TRUE),
                 'id_partai' => $this->input->post('id_partai',TRUE),
                 'id_komisi' => $this->input->post('id_komisi',TRUE),
                 'id_badan' => $this->input->post('id_badan',TRUE),
                 'ttd' => $fileName
         );
             $this->Tbl_pegawai_model->insert($data);
+            foreach ($_POST['id_jabatan']as $jab) {
+                $getLastId = $this->db->select_max('id_pegawai')->from('tbl_pegawai')->get()->row();
+                $insertJab = array(
+                    'id_pegawai' => $getLastId->id_pegawai,
+                    'id_jabatan' => $jab,
+                );
+                $this->db->insert('tbl_jabatan_pegawai', $insertJab);
+            }
             $this->session->set_flashdata('message', 'Create Record Success 2');
             redirect(site_url('pegawai?tipe='.$data['tipe']));
         }

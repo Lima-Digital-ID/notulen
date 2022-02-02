@@ -52,7 +52,7 @@
                                 Jabatan
                             </label>
                             <div class="col-lg-6">
-                                <select name="jenis_jabatan" multiple="multiple"  class="form-control select2" style="width:100%" required  onchange="cekKategori()">
+                                <select name="id_jabatan[]" multiple="multiple"  class="form-control select2" style="width:100%" required  onchange="cekKategori()">
                                     <!-- <option value="" <?=$tipe == '' ? 'selected' : ''?>>--Pilih Kategori--</option> -->
                                     <!-- <option value="2">Sekretariat DPRD</option> -->
                                     <?php 
@@ -62,6 +62,24 @@
                                         }
                                     ?>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 control-label text-lg-right pt-2">
+                                Upload Tanda Tangan
+                            </label>
+                            <div class="col-lg-6">
+                            <?php 
+                            //when edit
+                                $required = "required";
+                                if(isset($infoTtd)){
+                                    $required = "";
+                            ?>
+                            <img src="<?php echo base_url()."assets/images/upload-ttd/".$ttd ?>" alt="" width="150px">
+                            <br>
+                            <?php } ?>
+                                <?php echo isset($infoTtd) ? "<small style='color:red'>$infoTtd</small>" : "" ?>
+                                <input type="file" name="ttd" class="form-control" id="" <?=$required?>>
                             </div>
                         </div>
                         <div class="form-group row">

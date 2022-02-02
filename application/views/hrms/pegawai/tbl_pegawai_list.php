@@ -38,13 +38,26 @@
                         <table class="table table-bordered table-striped" id="pegawai_list">
                             <thead>
                                 <tr>
-                                    <th>Nama</th>
-                                    <th>Kategori</th>
-                                    <th>Fraksi</th>
-                                    <th>Komisi</th>
-                                    <th>Badan</th>
-                                    <th>Jabatan</th>
-                                    <?php 
+                                    <?php if($_GET['tipe'] == 1){ ?>
+                                        <th>Nama</th>
+                                        <th>Kategori</th>
+                                        <th>Fraksi</th>
+                                        <th>Komisi</th>
+                                        <th>Badan</th>
+                                        <th>Jabatan</th>
+                                    <?php }else if($_GET['tipe'] == 2){?>
+                                        <th>Nama</th>
+                                        <th>NIA</th>
+                                        <th>Kategori</th>
+                                        <th>Badan</th>
+                                        <th>Komisi</th>
+                                        <th>Jabatan</th>
+                                    <?php }else { ?>
+                                        <th>Nama</th>
+                                        <th>Kategori</th>
+                                        <th>Jabatan</th>
+                                    <?php } ?>
+                                        <?php 
                                         if($_SESSION['role']==1){
                                     ?>
                                     <th width="150px">Action</th>
