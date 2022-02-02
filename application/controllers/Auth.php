@@ -103,7 +103,7 @@ Class Auth extends CI_Controller{
             // }
         }else{
             $this->session->set_flashdata('status_login','email atau password yang anda input salah');
-            redirect('welcome/dasboard');
+            redirect('welcome/dashboard');
         }
     }
     
