@@ -101,9 +101,10 @@ Class Auth extends CI_Controller{
             // }else{
             //     redirect('absensi');
             // }
+            redirect('welcome/dashboard');
         }else{
             $this->session->set_flashdata('status_login','email atau password yang anda input salah');
-            redirect('welcome/dashboard');
+            redirect('auth');
         }
     }
     
