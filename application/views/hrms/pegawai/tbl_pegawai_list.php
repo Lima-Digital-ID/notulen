@@ -84,27 +84,71 @@
                 "data" : {id_tipe : "<?= $_GET['tipe'] ?>"}
             },
             columns: [
-                {"data": "nama_pegawai"},
-                {"data": "tipe", "class" : "text-center", "render": function(data, type, row){
-                    return getKategori(row.tipe);
-                }},
-                {"data": "nama_partai"},
-                {"data": "nama_komisi"},
-                {"data": "nama_badan"},
-                {"data": "id","render": function(data,type,row){
-                    var jabatan = ""
-                    $.ajax({
-                        url:"<?= base_url('pegawai/json_jabatan')?>",
-                        type : "get",
-                        async : false,
-                        data : {id_pegawai : row.id_pegawai},
-                        success : function(res){
-                            jabatan = res
-                        }
-                    })
 
-                    return jabatan
-                }},
+                <?php if($_GET['tipe'] == '1'){ ?>
+                    {"data": "nama_pegawai"},
+                    {"data": "tipe", "class" : "text-center", "render": function(data, type, row){
+                        return getKategori(row.tipe);
+                    }},
+                    {"data": "nama_partai"},
+                    {"data": "nama_komisi"},
+                    {"data": "nama_badan"},
+                    {"data": "id","render": function(data,type,row){
+                        var jabatan = ""
+                        $.ajax({
+                            url:"<?= base_url('pegawai/json_jabatan')?>",
+                            type : "get",
+                            async : false,
+                            data : {id_pegawai : row.id_pegawai},
+                            success : function(res){
+                                jabatan = res
+                            }
+                        })
+    
+                        return jabatan
+                    }},
+                <?php }else if($_GET['tipe'] == '2'){ ?>
+                    {"data": "nama_pegawai"},
+                    {"data": "nia"},
+                    {"data": "tipe", "class" : "text-center", "render": function(data, type, row){
+                        return getKategori(row.tipe);
+                    }},
+                    {"data": "nama_komisi"},
+                    {"data": "nama_badan"},
+                    {"data": "id","render": function(data,type,row){
+                        var jabatan = ""
+                        $.ajax({
+                            url:"<?= base_url('pegawai/json_jabatan')?>",
+                            type : "get",
+                            async : false,
+                            data : {id_pegawai : row.id_pegawai},
+                            success : function(res){
+                                jabatan = res
+                            }
+                        })
+    
+                        return jabatan
+                    }},
+                <?php }else{ ?>
+                    {"data": "nama_pegawai"},
+                    {"data": "tipe", "class" : "text-center", "render": function(data, type, row){
+                        return getKategori(row.tipe);
+                    }},
+                    {"data": "id","render": function(data,type,row){
+                        var jabatan = ""
+                        $.ajax({
+                            url:"<?= base_url('pegawai/json_jabatan')?>",
+                            type : "get",
+                            async : false,
+                            data : {id_pegawai : row.id_pegawai},
+                            success : function(res){
+                                jabatan = res
+                            }
+                        })
+    
+                        return jabatan
+                    }},
+                <?php } ?>
                 <?php 
                     if($_SESSION['role']==1){
                 ?>

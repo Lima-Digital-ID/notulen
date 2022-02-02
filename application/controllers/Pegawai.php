@@ -450,7 +450,7 @@ class Pegawai extends CI_Controller
         $jabatan = "";
         foreach ($getJabatan as $key => $value) {
             $key++;
-            $glue = $key==$countJabatan ?  ", " : '';
+            $glue = $key==$countJabatan ?  ",&nbsp " : '';
             $jabatan.=$value->jabatan.$glue;
         }
 

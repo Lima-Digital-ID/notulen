@@ -17,7 +17,7 @@ class Tbl_pegawai_model extends CI_Model
 
     // datatables
     function json($location_id,$idTipe="") {
-        $this->datatables->select('id_pegawai,  nama_pegawai,  tipe, p.nama as nama_partai, k.nama as nama_komisi, b.nama as nama_badan');
+        $this->datatables->select('id_pegawai,  nama_pegawai,  tipe, p.nama as nama_partai, k.nama as nama_komisi, b.nama as nama_badan, nia');
         $this->datatables->from('tbl_pegawai tp');
         $this->datatables->join('partai p', 'p.id=tp.id_partai', 'left');
         $this->datatables->join('komisi k', 'k.id=tp.id_komisi', 'left');
