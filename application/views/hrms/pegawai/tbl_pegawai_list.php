@@ -31,7 +31,7 @@
                     <?php 
                         if($_SESSION['role']==1){
                     ?>
-                    <a href="<?=base_url('pegawai/create')?>"><button class="btn-primary btn btn-md">Tambah</button></a>
+                    <a href="<?=base_url('pegawai/create?tipe='.$_GET['tipe'])?>"><button class="btn-primary btn btn-md">Tambah</button></a>
                     <br><br>
                     <?php } ?>
                     <div class="table-responsive">
@@ -78,6 +78,13 @@
                 {"data": "nama_partai"},
                 {"data": "nama_komisi"},
                 {"data": "nama_badan"},
+                {"render": function(url,data, type){
+                    $.ajax({
+                        "url":"<?= base_url('pegawai/json_jabatan')?>",
+                        "type":"POST",
+                        "data":"jabatan"
+                    })
+                }},
                 <?php 
                     if($_SESSION['role']==1){
                 ?>

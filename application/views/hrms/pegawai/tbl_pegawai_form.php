@@ -91,7 +91,7 @@
                         </div>
                         <div class="form-group row" id="row_partai">
                             <label class="col-lg-3 control-label text-lg-right pt-2">
-                                Partai
+                                Fraksi
                             </label>
                             <div class="col-lg-6">
                                 <select name="id_partai" id="id_partai" class="form-control select2" style="width:100%">
@@ -270,7 +270,7 @@
     function reloadPartaiOption(){
         var partai_option=$('#id_partai')
         partai_option.empty()
-        partai_option.append('<option value="">Pilih Partai</option>')
+        partai_option.append('<option value="">Pilih Fraksi</option>')
         $.ajax({
             type: "get",
             url: "<?= base_url('welcome/partai_option')?>", //json get site

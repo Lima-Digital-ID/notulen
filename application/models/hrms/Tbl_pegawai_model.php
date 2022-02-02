@@ -22,10 +22,21 @@ class Tbl_pegawai_model extends CI_Model
         $this->datatables->join('partai p', 'p.id=tp.id_partai', 'left');
         $this->datatables->join('komisi k', 'k.id=tp.id_komisi', 'left');
         $this->datatables->join('badan b', 'b.id=tp.id_badan', 'left');
+        // $this->datatables->join('tbl_jabatan_pegawai jp', 'jp.id_pegawai=tp.id_pegawai');
+        // $this->datatables->join('tbl_jabatan j', 'j.id=jp.id_jabatan');
         $this->datatables->where('tipe',$idTipe);
 
         $this->datatables->add_column('action', anchor(site_url('pegawai/update/$1'),'<i class="fa fa-edit" aria-hidden="true"></i>', array('class' => 'btn btn-success btn-sm', 'title' => 'Edit Pegawai'))." 
                 ".anchor(site_url('pegawai/delete/$1'),'<i class="fa fa-trash" aria-hidden="true"></i>','class="btn btn-danger btn-sm" title = "Hapus Pegawai" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_pegawai');
+        return $this->datatables->generate();
+    }
+
+    function json_jabatan()
+    {
+        $this->datatables->select('j.jabatan,  tp.nama_pegawai');
+        $this->datatables->from('tbl_jabatan_pegawai jp');
+        $this->datatables->join('tbl_jabatan j', 'j.id=jp.id_jabatan', 'left');
+        $this->datatables->join('tbl_pegawai tp', 'tp.id_pegawai=jp.id_pegawai', 'left');
         return $this->datatables->generate();
     }
 

@@ -63,6 +63,11 @@ class Pegawai extends CI_Controller
         echo $this->Tbl_pegawai_model->json_dprd();
     }
 
+    public function json_jabatan() {
+        header('Content-Type: application/json');
+        echo $this->Tbl_pegawai_model->json_jabatan();
+    }
+
     public function create() 
     {
         $data = array(
@@ -86,7 +91,14 @@ class Pegawai extends CI_Controller
             'getTipe' => $this->Admin_model->getData('*','tipe_pegawai','','','')->result_array()
 	    );
         $data['title']='Tambah Anggota';
-        $this->template->load('template','hrms/pegawai/tbl_pegawai_form', $data);
+        if($_GET['tipe']== '1'){
+            $page = 'tbl_pegawai_form';
+        }else if($_GET['tipe'] == '2'){
+            $page = 'tbl_dprd_form';
+        }else{
+            $page = 'tbl_non_dprd_form';
+        }
+        $this->template->load('template',"hrms/pegawai/$page", $data);
     }
 
     public function create_dprd() 
