@@ -15,12 +15,20 @@ class Absensi extends CI_Controller {
 	}
 	public function index()
 	{
+		if(isset($_GET['id_rapat']) && empty($_GET['allow'])){
+			$getNumOfAnggota = $this->Admin_model->getData("id",'anggota_rapat','',['id_rapat' => $_GET['id_rapat']],'')->num_rows();
+			$getNumOfAbsensi = $this->Admin_model->getData("id",'absensi_rapat','',['id_rapat' => $_GET['id_rapat']],'')->num_rows();
+			if($getNumOfAnggota==$getNumOfAbsensi){
+				redirect(base_url()."rapat?id_rapat=$_GET[id_rapat]");
+			}
+		}	
+
 		$where = isset($_GET['id_tipe']) ? ['id_tipe' => $_GET['id_tipe']] : '';
 		$tipe_pegawai = $this->Admin_model->getData('*','tipe_pegawai','',$where,'')->result_array();
 
 		$tipe = isset($_GET['id_tipe']) ? $tipe_pegawai[0]['tipe'] : '';
 		$data=array(
-			'title'	=> 'Absensi '.$tipe,
+			'title'	=> 'Daftar Hadir '.$tipe,
 			'tipe_pegawai' => $tipe_pegawai,
 			'tipe' => $tipe
 		);
@@ -32,6 +40,7 @@ class Absensi extends CI_Controller {
 		else{
 			$this->template->load('template', 'absensi/absensi', $data);
 		}
+
 	}
 	public function get_peserta()
 	{

@@ -57,7 +57,7 @@ $explode_tanggal = explode(' ', $tanggal);
     <tbody>
         <tr>
             <td width="104">
-                <p>&nbsp;RISALAH</p>
+                <p>&nbsp;NOTULEN</p>
             </td>
             <td width="19">
                 <p><strong>:</strong></p>

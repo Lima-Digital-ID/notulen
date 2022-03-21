@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Absensi Rapat <?= $rapat->title ?></div>
+                <div class="card-header">Daftar Hadir Rapat <?= $rapat->title ?></div>
                 <div class="card-body">
                     <div class="row">
                         <div class="table-responsive">
@@ -27,7 +27,7 @@
                                 <thead>
                                     <tr>
                                         <td>#</td>
-                                        <td>Absensi</td>
+                                        <td>Daftar Hadir</td>
                                         <td>Opsi</td>
                                     </tr>
                                 </thead>
@@ -39,7 +39,7 @@
                                     <tr>
                                         <td><?= $key ?></td>
                                         <td><?= $value['tipe'] ?></td>
-                                        <td><a href="" data-toggle="modal" data-tipe="<?= $value['id_tipe'] ?>" data-target="#myModal" data-peserta="<?= $value['tipe'] ?>" class="btn-peserta btn btn-primary btn-xs">Absensi</a></td>
+                                        <td><a href="" data-toggle="modal" data-tipe="<?= $value['id_tipe'] ?>" data-target="#myModal" data-peserta="<?= $value['tipe'] ?>" class="btn-peserta btn btn-primary btn-xs">Daftar Hadir</a></td>
                                     </tr>
                                 <?php
                                     }
@@ -134,7 +134,7 @@
                     $.each(res,function(i,v){
                         var absen
                         if (v.status_absen == 0 ) {
-                            absen = `<button type="button" class="btn btn-primary mt-2" data-target="#modalAbsenRapat" data-tipe="${id_tipe}" data-toggle="modal" style="margin-top:5px">Absen</button>`
+                            absen = `<button type="button" class="btn btn-primary mt-2" data-target="#modalAbsenRapat" data-tipe="${id_tipe}" data-id="${v.id}" data-toggle="modal" style="margin-top:5px">Absen</button>`
                         } 
                         else {
                             absen = `<p class="btn btn-success mt-2">Sudah Absen</p>`
@@ -149,11 +149,11 @@
                                 </div>
                             </div>
                         `)
-                        $("button[data-target='#modalAbsenRapat']").click(function(){
-                            $("#modalAbsenRapat #id_tipe").val(id_tipe)
-                            $('#id2').val(v.id)
-                            // setCameranLocation2(this)
-                        })
+                    })
+                    $("button[data-target='#modalAbsenRapat']").click(function(){
+                        $("#modalAbsenRapat #id_tipe").val(id_tipe)
+                        $('#id2').val($(this).data('id'))
+                        // setCameranLocation2(this)
                     })
                 }
             })
@@ -168,7 +168,7 @@
             var latitude = $('#latitude2').val();
             var file_absen = $('#file_absen2').val();
             if (longitude == '' || latitude == '' || file_absen == '') {
-                alert('Tekan tombol OK dan Simpan untuk absensi')
+                alert('Tekan tombol OK dan Simpan untuk daftar hadir')
             } else {
                 $('#form_absen2').submit();
             }

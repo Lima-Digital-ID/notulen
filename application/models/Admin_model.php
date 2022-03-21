@@ -272,7 +272,7 @@ class Admin_model extends CI_Model
         }
         return $data;
     }
-    function rapat_json($tipe,$sub){
+    function rapat_json($tipe,$sub,$id_rapat){
         $this->datatables->select("id, tanggal, waktu, title, event, tipe, sifat, tempat, is_edit, created_at, updated_at,(select count(*) ttl from anggota_rapat where id_rapat = r.id) ttl_anggota, (select count(*) ttl from absensi_rapat where id_rapat = r.id) ttl_absen");
         $this->datatables->from('rapat r');
         // $this->datatables->where('deleted_at', null);
@@ -281,6 +281,9 @@ class Admin_model extends CI_Model
         }
         if($sub!=""){
             $this->datatables->where('sub_tipe_komisi',$sub);
+        }
+        if($id_rapat!=""){
+            $this->datatables->where('r.id',$id_rapat);
         }
         $this->db->order_by('updated_at','desc');
         return $this->datatables->generate();

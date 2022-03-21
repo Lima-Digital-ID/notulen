@@ -18,7 +18,7 @@ class Absensi extends CI_Controller
 
     public function index()
     {
-        $data['title']='Absensi';
+        $data['title']='Daftar Hadir';
         $this->template->load('template','hrms/absensi/absensi_list', $data);
     } 
 
@@ -168,7 +168,7 @@ class Absensi extends CI_Controller
             'jam_pulang' => set_value('jam_pulang', ($row->jam_datang == null ? '00:00:00' : $row->jam_pulang)),
             'ket' => set_value('ket', $row->ket),
             'uang_lembur' => set_value('uang_lembur', $row->uang_lembur),
-            'title'     => 'Edit Absensi'
+            'title'     => 'Edit Daftar Hadir'
         );
         $this->template->load('template','hrms/absensi/absensi_update', $data);
     }
@@ -281,7 +281,7 @@ class Absensi extends CI_Controller
     }
 
     public function import_excel(){
-        $data['title']='Import Absensi';
+        $data['title']='Import Daftar Hadir';
         $this->template->load('template','hrms/absensi/import_excel', $data);
     }
     

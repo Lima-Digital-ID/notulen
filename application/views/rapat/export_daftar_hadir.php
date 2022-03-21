@@ -121,7 +121,7 @@ body{
                 <p>:</p>
                 </td>
                 <td colspan="4" width="625">
-                <?=$row_rapat->event?>
+                <?=$row_rapat->title?>
                 </td>
             </tr>
         </tbody>

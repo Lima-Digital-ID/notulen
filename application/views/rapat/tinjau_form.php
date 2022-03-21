@@ -125,7 +125,7 @@ function jenisRapat($tipe){
                             </textarea>
                         </div>  
                         <div class="form-group" <?=$row_rapat->tipe != 1 ? 'hidden' : ''?>>
-                            <label for="">Isi Risalah</label>
+                            <label for="">Isi Notulen</label>
                             <textarea name="isi_risalah" cols="50" rows="15" class="mymce">
                             <?=$row_rapat->isi_risalah?>
                             </textarea>
@@ -157,6 +157,14 @@ function jenisRapat($tipe){
                                 <div class="form-group">
                                     <label for="">Wakil Ketua 2 Rapat</label>
                                     <select name="wakil_ketua2" id="wakil_ketua2" class="form-control select2" style="width:100%">
+                                    
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6" <?=$row_rapat->tipe == 1 ? 'hidden' : ''?>>
+                                <div class="form-group">
+                                    <label for="">Sekretaris</label>
+                                    <select name="sekretaris" id="sekretaris" class="form-control select2" style="width:100%">
                                     
                                     </select>
                                 </div>
@@ -309,6 +317,7 @@ $(document).ready(function(){
     pimpinanOption()
     wakilKetua1Option()
     wakilKetua2Option()
+    sekretarisOption()
     showGalery();
     $(document).ready(function() {
         if ($(".mymce").length > 0) {
@@ -379,6 +388,26 @@ function wakilKetua2Option(){
             if(response_data != null){
                 for(i=0; i < response_data.length; i++){
                     wakilKetua2.append('<option '+(<?=$row_rapat->wakil_ketua2 != null ? $row_rapat->wakil_ketua2 : 0?> == response_data[i]['id_pegawai'] ? 'selected' : '')+' value="'+response_data[i]['id_pegawai']+'">'+response_data[i]['nama_pegawai']+'</option>')
+                }
+            }
+        }
+    });
+}
+function sekretarisOption(){
+    var sekretaris=$('#sekretaris')
+    sekretaris.empty()
+    sekretaris.append('<option value="">Pilih Sekretaris</option>')
+
+    $.ajax({
+        type: "get",
+        url: "<?= base_url('rapat/anggota_rapat/'.$row_rapat->id.'/2')?>", //json get site
+        dataType : 'json',
+        success: function(response){
+            console.log(response)
+            response_data=response['data'];
+            if(response_data != null){
+                for(i=0; i < response_data.length; i++){
+                    sekretaris.append('<option '+(<?=$row_rapat->sekretaris != null ? $row_rapat->sekretaris : 0?> == response_data[i]['id_pegawai'] ? 'selected' : '')+' value="'+response_data[i]['id_pegawai']+'">'+response_data[i]['nama_pegawai']+'</option>')
                 }
             }
         }

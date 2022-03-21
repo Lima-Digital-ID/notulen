@@ -191,7 +191,8 @@ class Rapat extends CI_Controller {
 		header('Content-Type: application/json');
 		$tipe = isset($_GET['tipe']) ? $_GET['tipe'] : '';
 		$sub = isset($_GET['sub']) ? $_GET['sub'] : '';
-		echo $this->Admin_model->rapat_json($tipe,$sub);
+		$id_rapat = isset($_GET['id_rapat']) ? $_GET['id_rapat'] : '';
+		echo $this->Admin_model->rapat_json($tipe,$sub,$id_rapat);
 	}
 	public function rapattahun_json(){
 		header('Content-Type: application/json');
@@ -203,15 +204,15 @@ class Rapat extends CI_Controller {
 	}
 	public function add_rapat()
 	{
-		$this->db->select("nomor");		
+		$this->db->select("nomor_auto");		
 		$this->db->order_by("id","desc");		
-		$this->db->limit(1);		
+		$this->db->limit(1);
 		$getLastNo = $this->db->get_where("rapat",["YEAR(created_at)" => date('Y'),"MONTH(created_at)" => date('m')]);
 		if($getLastNo->num_rows()==0){
 			$no = 1;
 		}
 		else{
-			$nomor = $getLastNo->row()->nomor;
+			$nomor = $getLastNo->row()->nomor_auto;
 			$ex = explode("/",$nomor);
 			$no = (int)$ex[0];
 			$no++;
@@ -252,13 +253,14 @@ class Rapat extends CI_Controller {
             'tipe'      =>$this->input->post('tipe'),
             'sifat'     =>$this->input->post('sifat'),
             'nomor'     =>$this->input->post('nomor'),
+            'nomor_auto'     =>$this->input->post('nomor_auto'),
             'event'     => empty($this->input->post('event')) ? "" : $this->input->post('event'),
             // 'lampiran'     =>$this->input->post('lampiran'),
 		);
-		if(isset($_POST['sekretaris'])){
+/* 		if(isset($_POST['sekretaris'])){
 			$data['sekretaris'] = $_POST['sekretaris'];
 		}
-		if(isset($_POST['sub_menu_komisi'])){
+ */		if(isset($_POST['sub_menu_komisi'])){
 			$data['sub_tipe_komisi'] = $_POST['sub_menu_komisi'];
 		}
 		$this->Admin_model->insert_table('rapat', $data);
@@ -274,13 +276,13 @@ class Rapat extends CI_Controller {
 				$this->Admin_model->insert_table('anggota_rapat', $data);
 			}
 		}
-		$sekretaris=array(
+/* 		$sekretaris=array(
 			'id_rapat'     =>$id,
 			'id_pegawai'     =>$_POST['sekretaris'],
 			'jabatan_rapat' => 4
 		);
 		$this->Admin_model->insert_table('anggota_rapat', $sekretaris);
-		//save galery
+ */		//save galery
 		$image_name = [];
    
 		$count = count($_FILES['files']['name']);
@@ -407,6 +409,7 @@ class Rapat extends CI_Controller {
 			'pimpinan'	=> $this->input->post('pimpinan'),
 			'wakil_ketua1'	=> $this->input->post('wakil_ketua1'),
 			'wakil_ketua2'	=> $this->input->post('wakil_ketua2'),
+			'sekretaris'	=> $this->input->post('sekretaris'),
 			// 'is_edit'	=> $this->input->post('is_edit'),
 		);
 		$this->db->where('id', $this->input->post('id'))->update('rapat', $update);
@@ -420,6 +423,9 @@ class Rapat extends CI_Controller {
 		}
 		if($this->input->post('wakil_ketua2') != null){
 			$this->db->where('id_rapat', $this->input->post('id'))->where('id_pegawai', $this->input->post('wakil_ketua2'))->update('anggota_rapat', array('jabatan_rapat' => 3));
+		}
+		if($this->input->post('sekretaris') != null){
+			$this->db->where('id_rapat', $this->input->post('id'))->where('id_pegawai', $this->input->post('sekretaris'))->update('anggota_rapat', array('jabatan_rapat' => 4));
 		}
 		//update absensi
 		$check_id=$this->input->post('check_id');
@@ -499,7 +505,7 @@ class Rapat extends CI_Controller {
     {
 		if($word=="true"){
 			header("Content-type: application/vnd.ms-word");
-			header("Content-Disposition: attachment;Filename=risalah rapat.doc");
+			header("Content-Disposition: attachment;Filename=Notulen rapat.doc");
 		}
 
         $row_rapat = $this->Admin_model->get_table_rapat_by_id($id);
@@ -528,7 +534,7 @@ class Rapat extends CI_Controller {
     {
 		if($word=="true"){
 			header("Content-type: application/vnd.ms-word");
-			header("Content-Disposition: attachment;Filename=notulen kegiatan.doc");
+			header("Content-Disposition: attachment;Filename=Daftar Hadir Kegiatan.doc");
 		}
 
 		$row_rapat = $this->Admin_model->get_table_by_id('rapat', $id);

@@ -25,7 +25,8 @@
                     <form class="mt-4" action="<?=base_url('rapat/save_rapat')?>" method="post" id="form_add" autocomplete="off" enctype="multipart/form-data">
                         <div class="form-group" id="nomorRapat">
                             <label for="">Nomor Rapat</label>
-                            <input type="text" name="nomor"  class="form-control" value="<?= $nomor ?>" readonly>
+                            <input type="text" name="nomor"  class="form-control">
+                            <input type="hidden" name="nomor_auto"  class="form-control" value="<?= $nomor ?>">
                         </div>           
 
                         <div class="form-group">
@@ -117,7 +118,7 @@
                                 
                                 <div id="sekwan">
                                 <label for="" class="mt-3">Sekretaris Dewan</label>
-                                <select name="sekretaris" id="row_sekwan" style="width:100%" class="select2 form-control"></select>
+                                <select name="id_anggota[]" id="row_sekwan" style="width:100%" class="select2 form-control" multiple="multiple"></select>
                                 </div>
                             </div>
                             

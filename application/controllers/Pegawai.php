@@ -174,7 +174,7 @@ class Pegawai extends CI_Controller
                 'nip' => set_value('nip', $row->nip),
                 'nia' => set_value('nia', $row->nia),
                 'tipe' => set_value('tipe', $row->tipe),
-                'jenis_jabatan' => set_value('jenis_jabatan', $row->jenis_jabatan),
+                // 'jenis_jabatan' => set_value('jenis_jabatan', $row->jenis_jabatan),
                 'id_partai' => set_value('id_partai', $row->id_partai),
                 'id_komisi' => set_value('id_komisi', $row->id_komisi),
                 'id_badan' => set_value('id_badan', $row->id_badan),
@@ -184,6 +184,7 @@ class Pegawai extends CI_Controller
 	        );
             $data['title']='Update Anggota';
             $data['infoTtd'] = "Abaikan upload jika tidak ingin update tanda tangan";
+            $data['allJab'] = $this->db->get('tbl_jabatan')->result();
             $this->template->load('template','hrms/pegawai/tbl_pegawai_form', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
@@ -201,7 +202,7 @@ class Pegawai extends CI_Controller
                 'nip' => $this->input->post('nip',TRUE),
                 'nia' => $this->input->post('nia',TRUE),
                 'tipe' => $this->input->post('tipe',TRUE),
-                'jenis_jabatan' => $this->input->post('jenis_jabatan',TRUE),
+                // 'jenis_jabatan' => $this->input->post('jenis_jabatan',TRUE),
                 'id_partai' => $this->input->post('id_partai',TRUE),
                 'id_komisi' => $this->input->post('id_komisi',TRUE),
                 'id_badan' => $this->input->post('id_badan',TRUE),
@@ -238,6 +239,15 @@ class Pegawai extends CI_Controller
             }
 
             if($update){
+                $this->db->delete('tbl_jabatan_pegawai',['id_pegawai' => $this->input->post('id_pegawai', TRUE)]);
+                foreach ($_POST['id_jabatan']as $jab) {
+                    $insertJab = array(
+                        'id_pegawai' => $this->input->post('id_pegawai', TRUE),
+                        'id_jabatan' => $jab,
+                    );
+                    $this->db->insert('tbl_jabatan_pegawai', $insertJab);
+                }
+    
                    $this->Tbl_pegawai_model->update($this->input->post('id_pegawai', TRUE), $data);
                    $this->session->set_flashdata('message', 'Update Record Success');
                    redirect(site_url('pegawai?tipe='.$data['tipe']));
@@ -300,7 +310,7 @@ class Pegawai extends CI_Controller
 	// $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
     public function import_excel(){
-        $data['title']='Import Absensi';
+        $data['title']='Import Daftar Hadir';
         $this->template->load('template','hrms/pegawai/import_excel', $data);
     }
     

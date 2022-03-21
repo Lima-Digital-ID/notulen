@@ -55,7 +55,7 @@
                                     <th class="text-center">Tanggal</th>
                                     <th class="text-center">Waktu</th>
                                     <th class="text-center">Jenis Rapat</th>
-                                    <th class="text-center">Status Absensi</th>
+                                    <th class="text-center">Status Daftar Hadir</th>
                                     <th class="text-center" width="200px">Action</th>
                                 </tr>
                             </thead>
@@ -95,6 +95,7 @@ foreach($db as $a) { ?>
 <?php } ?>
 <script src="<?=base_url('assets/')?>theme/assets/libs/jquery/dist/jquery.min.js"></script>
 <?php 
+    $idRapat = isset($_GET['id_rapat']) ? "?id_rapat=$_GET[id_rapat]" : "";
     $tipe = isset($_GET['tipe']) ?  "?tipe=$_GET[tipe]" : "";
     $sub = isset($_GET['sub']) ?  "?tipe=$_GET[tipe]&sub=$_GET[sub]" : "";
 ?>
@@ -104,7 +105,7 @@ foreach($db as $a) { ?>
             "processing": true,
             "serverSide": true,
             "ajax": {
-                "url": "<?=base_url('rapat/rapat_json'.$tipe.$sub)?>",
+                "url": "<?=base_url('rapat/rapat_json'.$idRapat.$tipe.$sub)?>",
                 "type": "POST",
             },
             "aaSorting": [[ 2, "desc" ]],
@@ -116,7 +117,7 @@ foreach($db as $a) { ?>
                 {"data": "waktu", "class" : 'text-center'},
                 {"data": "tipe", "render": function(data, type, row){return jenisRapat(row.tipe)}, "class" : 'text-center'},
                 {"data": "status_absen", "render": function(data, type, row){
-                    return row.ttl_absen==row.ttl_anggota ? "<span class='badge badge-success'><i class='fa fa-check-circle'></i> Absensi Lengkap</span>" : "<span class='badge badge-danger'><i class='fa fa-exclamation-triangle'></i>  Absensi Belum Lengkap</span>"
+                    return row.ttl_absen==row.ttl_anggota ? "<span class='badge badge-success'><i class='fa fa-check-circle'></i> Daftar Hadir Lengkap</span>" : "<span class='badge badge-danger'><i class='fa fa-exclamation-triangle'></i>  Daftar Hadir Belum Lengkap</span>"
                 }, "class" : 'text-center'},
                 {"data": "id", "class" : 'text-center', "render": function(data, type, row){
                     var preview = ""
@@ -137,7 +138,7 @@ foreach($db as $a) { ?>
                         preview = paramPreview
                         download = paramDownload
                     }
-                    return '<a href="<?= base_url()."absensi?id_rapat=" ?>'+row.id+'" class="btn btn-info btn-sm">Absensi</a> <a '+(row.is_edit != 1 ? 'hidden' : '')+' href="<?=base_url('rapat/tinjau')?>/'+row.id+'" class="btn btn-sm btn-info text-white">Buat Risalah</a>&nbsp;'+(row.tipe == 1 ? '<a href="<?=base_url('rapat/word')?>/'+row.id+'" class="btn btn-sm btn-primary text-white" target="_blank">Risalah</a>' : '<a href="<?=base_url('rapat/word_bamus')?>/'+row.id+'" class="btn btn-sm btn-primary text-white" target="_blank"><span class="fa fa-download"></span> Download Notulen</a>')+'&nbsp;<a href="<?=base_url('rapat/word_bamus')?>/'+row.id+'/false" class="btn btn-sm btn-primary text-white" target="_blank"><span class="fa fa-eye"></span> Print & Preview Notulen</a><div class="dropdown"><button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">Download Daftar Hadir</button><div class="dropdown-menu">'+download+'</div></div><div class="dropdown"><button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">Print & Preview Absensi</button><div class="dropdown-menu">'+preview+'</div></div>&nbsp;<a href="<?=base_url('rapat/edit_rapat')?>/'+row.id+'" class="btn text-white btn-sm btn-warning">Edit</a>&nbsp;<a href="<?=base_url('rapat/delete_rapat')?>/'+row.id+'" class="btn text-white btn-sm btn-danger" onclick="return confirm(\'Are you sure you want to delete this item?\');">Hapus</a>';
+                    return '<a href="<?= base_url()."absensi?id_rapat=" ?>'+row.id+'&allow=true" class="btn btn-info btn-sm">Daftar Hadir</a> <a '+(row.is_edit != 1 ? 'hidden' : '')+' href="<?=base_url('rapat/tinjau')?>/'+row.id+'" class="btn btn-sm btn-info text-white">Buat Notulen</a>&nbsp;'+(row.tipe == 1 ? '<a href="<?=base_url('rapat/word')?>/'+row.id+'" class="btn btn-sm btn-primary text-white" target="_blank">Notulen</a>' : '<a href="<?=base_url('rapat/word_bamus')?>/'+row.id+'" class="btn btn-sm btn-primary text-white" target="_blank"><span class="fa fa-download"></span> Download Notulen</a>')+'&nbsp;<a href="<?=base_url('rapat/word_bamus')?>/'+row.id+'/false" class="btn btn-sm btn-primary text-white" target="_blank"><span class="fa fa-eye"></span> Print & Preview Notulen</a><div class="dropdown"><button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">Download Daftar Hadir</button><div class="dropdown-menu">'+download+'</div></div><div class="dropdown"><button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">Print & Preview Daftar Hadir</button><div class="dropdown-menu">'+preview+'</div></div>&nbsp;<a href="<?=base_url('rapat/edit_rapat')?>/'+row.id+'" class="btn text-white btn-sm btn-warning">Edit</a>&nbsp;<a href="<?=base_url('rapat/delete_rapat')?>/'+row.id+'" class="btn text-white btn-sm btn-danger" onclick="return confirm(\'Are you sure you want to delete this item?\');">Hapus</a>';
                 }}
             ],
         } );

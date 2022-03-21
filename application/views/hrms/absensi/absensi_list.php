@@ -23,7 +23,7 @@
                         <?php //echo anchor(site_url('hrms/absensi/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-info btn-sm"'); ?>
                         <?php //echo anchor(site_url('hrms/absensi/cuti'), '<i class="fa fa-plus" aria-hidden="true"></i> Tambah Cuti', 'class="btn btn-warning btn-sm"'); ?>
                         <!-- &nbsp; -->
-                        <?php echo anchor(site_url('hrms/absensi/month'), '<i class="fab fa-wpforms" aria-hidden="true"></i> Log Absensi per Bulan', 'class="btn btn-primary btn-sm"'); ?>
+                        <?php echo anchor(site_url('hrms/absensi/month'), '<i class="fab fa-wpforms" aria-hidden="true"></i> Log Daftar Hadir per Bulan', 'class="btn btn-primary btn-sm"'); ?>
                         &nbsp;
                         <?php echo anchor(site_url('hrms/absensi/lembur'), '<i class="fa fa-clock" aria-hidden="true"></i> Tambah Uang Lembur', 'class="btn btn-primary btn-sm"'); ?>
                         &nbsp;

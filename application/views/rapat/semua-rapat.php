@@ -28,7 +28,7 @@
                                     <th class="text-center">No</th>
                                     <th class="text-center">Jenis Rapat</th>
                                     <th class="text-center">Jumlah Rapat</th>
-                                    <th class="text-center">Jumlah Absensi</th>
+                                    <th class="text-center">Jumlah Daftar Hadir</th>
                                     <th class="text-center" width="200px">Action</th>
                                 </tr>
                             </thead>

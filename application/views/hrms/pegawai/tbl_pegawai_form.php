@@ -200,7 +200,7 @@
         <div class="modal-content">
             <form id="form_badan" action="javascript:;" accept-charset="utf-8" method="post" enctype="multipart/form-data">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Tambah Banggar</h4>
+                <h4 class="modal-title" id="myModalLabel">Tambah AKD</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -284,6 +284,7 @@
                 }
             }
         });
+        partai_option.select2()
     }
     function reloadKomisiOption(){
         var komisi_option=$('#id_komisi')
@@ -302,6 +303,7 @@
                 }
             }
         });
+        komisi_option.select2()
     }
     function reloadBadanOption(){
         var banggar_option=$('#id_badan')
@@ -320,6 +322,7 @@
                 }
             }
         });
+        banggar_option.select2()
     }
     function cekKategori(){
         val=$('#tipe').find(':selected').attr('data-kategori'); //

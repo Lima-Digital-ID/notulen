@@ -111,7 +111,7 @@
                     </div>
                 </div>
             </div>
-            <h3 class="text-center" id="copyright" style="margin-top:8%;margin-bottom:10%">Sistem Elektronik Rapat DPRD Kota Blitar 
+            <h3 class="text-center" id="copyright" style="margin-top:8%;margin-bottom:10%">Sistem Elektronik Rapat Sekretariat DPRD Kota Blitar 
             <br>
 Sekretariat DPRD Kota Blitar
             <br>

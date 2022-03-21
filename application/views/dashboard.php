@@ -6,7 +6,7 @@
                 <span class="db"><img witdh="250px" height="300px" src="<?=base_url('assets/')?>theme/assets/images/logo3.png" alt="logo" /></span>
                 <h1>Selamat Datang di</h1>
                 <h1>Aplikasi E-Radar</h1>
-                <h1>Elektronik Rapat DPRD Kota Blitar</h1>
+                <h1>Elektronik Rapat Sekretariat DPRD Kota Blitar</h1>
                 <!--<h3 class="font-weight-bold">Tahun <?= date('Y') ?></h3>-->
             </div>
             <?php 
