@@ -93,7 +93,7 @@
                     {"data": "nama_partai"},
                     {"data": "nama_komisi"},
                     {"data": "nama_badan"},
-                    {"data": "id","render": function(data,type,row){
+                    {"data": "id","searchable":false,"render": function(data,type,row){
                         var jabatan = ""
                         $.ajax({
                             url:"<?= base_url('pegawai/json_jabatan')?>",
@@ -168,11 +168,18 @@
     }
     function getKategori(val){
         if(val == 1){
-            return 'Anggota Dewan'
+            return 'Anggota DPRD Kota Blitar'
         }else if(val == 2){
-            return 'Forkopimda'
-        }else{
-            return 'Sekretaris Dewan'
+            return 'Sekretariat DPRD'
+        }
+        else if(val==3){
+            return 'Mitra Kerja FORKOPIMDA'
+        }
+        else if(val==4){
+            return 'Mitra Kerja HORIZONTAL'
+        }
+        else if(val==3){
+            return 'Mitra Kerja Vertikal'
         }
     }
 </script>

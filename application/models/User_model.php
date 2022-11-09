@@ -17,11 +17,13 @@ class User_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('users.id, users.username, users.email, tbl_pegawai.nama_pegawai');
+        $this->datatables->select('role,users.id, users.username, users.email, tbl_pegawai.nama_pegawai');
         $this->datatables->from('users');
         $this->datatables->join('tbl_pegawai', 'tbl_pegawai.id_pegawai=users.id_pegawai', 'left');
         $this->datatables->add_column('action', anchor(site_url('user/update/$1'),'<i class="fa fa-edit" aria-hidden="true"></i>', array('class' => 'btn btn-success btn-sm', 'title' => 'Edit Pegawai'))." 
                 ".anchor(site_url('user/delete/$1'),'<i class="fa fa-trash" aria-hidden="true"></i>','class="btn btn-danger btn-sm" title = "Hapus Pegawai" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
+        $this->datatables->add_column('edit', anchor(site_url('user/update/$1'),'<i class="fa fa-edit" aria-hidden="true"></i>', array('class' => 'btn btn-success btn-sm', 'title' => 'Edit Pegawai')), 'id');
+        $this->datatables->add_column('delete', anchor(site_url('user/delete/$1'),'<i class="fa fa-trash" aria-hidden="true"></i>','class="btn btn-danger btn-sm" title = "Hapus Pegawai" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
         return $this->datatables->generate();
     }
 

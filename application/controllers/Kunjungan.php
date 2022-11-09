@@ -297,12 +297,14 @@ class Kunjungan extends CI_Controller {
     {
         $row_kunjungan = $this->Admin_model->get_table_by_id('kunjungan', $id);
         $sub_tipe=$this->db->where('id', $row_kunjungan->id_sub_tipe_kunjungan)->get('sub_tipe_kunjungan')->row();
+		$pegawai = $this->Admin_model->getData('id_pegawai,nama_pegawai','tbl_pegawai','','','')->result_array();
         if ($row_kunjungan) {
             $data = array(
                 'action' => site_url('kunjungan/tinjau_action'),
                 'row_kunjungan' => $row_kunjungan,
                 'sub_tipe'  => $sub_tipe,
-				'title' => 'Tinjau Kunjungan'
+				'title' => 'Tinjau Kunjungan',
+				'pegawai' => $pegawai
 			);
             $this->template->load('template','kunjungan/tinjau_form', $data);
         } else {
@@ -417,7 +419,12 @@ class Kunjungan extends CI_Controller {
 			$this->Admin_model->insert_table('galery_rapat', $data);
 		}
 		
-		redirect('kunjungan');
+		if(isset($_POST['is_sidak'])){
+			redirect('sidak');
+		}
+		else{
+			redirect('kunjungan');
+		}
     }
     public function word($id,$word="true")
 	{
@@ -468,8 +475,8 @@ class Kunjungan extends CI_Controller {
 	}
     public function word_hearing($id)
     {
-        header("Content-type: application/vnd.ms-word");
-        header("Content-Disposition: attachment;Filename=laporan hearing.doc");
+        // header("Content-type: application/vnd.ms-word");
+        // header("Content-Disposition: attachment;Filename=laporan hearing.doc");
 
         $row_kunjungan = $this->Admin_model->get_table_by_id('kunjungan', $id);
         $sub_tipe=$this->db->where('id', $row_kunjungan->id_sub_tipe_kunjungan)->get('sub_tipe_kunjungan')->row();

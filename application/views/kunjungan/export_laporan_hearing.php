@@ -32,108 +32,74 @@ function formatBulan($date){
         </tr>
     </tbody>
 </table>
-<br><hr><hr>
-<table>
+<br><hr>
+<table width="100%">
     <tbody>
         <tr>
-            <td width="88">
+            <td>
                 <p>Nomor</p>
             </td>
-            <td width="23">
+            <td>
+            :
             </td>
-            <td width="252">
+            <td>
                 <p>090 / &nbsp;&nbsp;&nbsp;/Audiensi /XI/ 2020</p>
             </td>
-            <td width="16">
+            <td>
             </td>
-            <!-- <td width="214">
-                <p>Kepada :</p>
-            </td> -->
+            <td rowspan="4" style="vertical-align:top">
+                Kepada :
+                <br>
+                Yth. Ketua  DPRD
+                <br>
+                KOTA BLITAR
+                <br>
+                Di-
+                <br>
+                <strong><u>BLITAR</u></strong>                
+            </td>
         </tr>
         <tr>
-            <td width="88">
+            <td>
                 <p>Sifat</p>
             </td>
-            <td width="23">
+            <td>
                 <p>:</p>
             </td>
-            <td width="252">
+            <td>
                 <p>Biasa</p>
             </td>
-            <td width="16">
+            <td>
                 <p>&nbsp;</p>
-            </td>
-            <td width="214">
-                <p>Yth. Ketua &nbsp;DPRD</p>
             </td>
         </tr>
         <tr>
-            <!-- <td width="88">
+            <td>
                 <p>Lampiran</p>
-            </td> -->
-            <td width="23">
+            </td>
+            <td>
                 <p>:</p>
             </td>
-            <td width="252">
+            <td>
                 <p>1 (satu) berkas</p>
             </td>
-            <td width="16">
+            <td>
                 <p>&nbsp;</p>
-            </td>
-            <td width="214">
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;KOTA BLITAR</p>
             </td>
         </tr>
         <tr>
-            <td width="88">
+            <td>
                 <p>Perihal</p>
             </td>
-            <td width="23">
+            <td>
                 <p>:</p>
             </td>
-            <td width="252">
+            <td>
                 <p>Laporan Penerimaan Audiensi</p>
                 <p>KRPK Blitar Tahun 2020</p>
                 <p>-----------------------------------------</p>
             </td>
-            <td width="16">
-                <p>&nbsp;</p>
-            </td>
-            <td width="214">
-                <p>&nbsp;&nbsp; Di -</p>
-            </td>
-        </tr>
-        <tr>
-            <td width="88">
-                <p>&nbsp;</p>
-            </td>
-            <td width="23">
-                <p>&nbsp;</p>
-            </td>
-            <td width="252">
-                <p>&nbsp;</p>
-            </td>
-            <td width="16">
-                <p>&nbsp;</p>
-            </td>
-            <td width="214">
-                <p><strong><u>BLITAR</u></strong></p>
-            </td>
-        </tr>
-        <tr>
-            <td width="88">
-                <p>&nbsp;</p>
-            </td>
-            <td width="23">
-                <p>&nbsp;</p>
-            </td>
-            <td width="252">
-                <p>&nbsp;</p>
-            </td>
-            <td width="16">
-                <p>&nbsp;</p>
-            </td>
-            <td width="214">
+            <td>
                 <p>&nbsp;</p>
             </td>
         </tr>

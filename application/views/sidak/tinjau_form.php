@@ -46,6 +46,7 @@ function tipeKunjungan($tipe){
                 <div class="card-body">
                     <h4 class="card-title"><?=$title?></h4>
                     <form class="mt-4" action="<?=base_url('kunjungan/save_tinjauan')?>" method="post" id="form_tinjau" autocomplete="off" enctype="multipart/form-data">
+                    <input type="hidden" name="is_sidak" value="true">
                         <table style="width:100%">
                             <thead>
                                 <tr>

@@ -99,7 +99,7 @@
                                     <!-- <option value="2">Sekretariat DPRD</option> -->
                                     <?php 
                                         foreach ($allJab as $key => $value) {
-                                            $selected  = $tipe==$value->id ? 'selected' : '';
+                                            $selected  = in_array($value->id,$id_jabatan)  ? 'selected' : '';
                                             echo "<option value='$value->id' $selected>$value->jabatan</option>";
                                         }
                                     ?>
@@ -200,7 +200,7 @@
         <div class="modal-content">
             <form id="form_badan" action="javascript:;" accept-charset="utf-8" method="post" enctype="multipart/form-data">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Tambah AKD</h4>
+                <h4 class="modal-title" id="myModalLabel">Tambah Badan</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">

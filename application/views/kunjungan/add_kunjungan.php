@@ -48,17 +48,19 @@
                             </div>
                         </div>          
                         <div class="row">
-                            <div class="col-6">
+                            <!-- <div class="col-6">
                                 <div class="form-group">
                                     <label for="">Tipe Kunjungan</label>
                                     <select name="tipe" id="tipe" class="form-control" style="width:100%" readonly="true">
-                                        <option value="1">Kunjungan Kerja</option>
-                                        <!-- <option value="2">Hearing</option> -->
-                                        <!--<option value="3">Sidak</option>-->
-                                    </select>
-                                </div>
-                            </div>
+                                        <option value="1">Kunjungan Kerja</option> -->
+                                        <!-- <option value="2">Hearing</option>
+                                        <option value="3">Sidak</option> -->
+                                    <!-- </select> -->
+                                <!-- </div> -->
+                            <!-- </div> --> 
                             <div class="col-6">
+                            <input type="hidden" name="tipe" id="tipe" value='1'>
+
                                 <div class="form-group">
                                     <label for="">Jenis Kunjungan</label>
                                     <select name="jenis" id="jenis" class="form-control select2" style="width:100%">

@@ -83,7 +83,7 @@
                             </label>
                             <div class="col-lg-6">
                                     <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button> 
-                                    <a href="<?php echo site_url('hrms/pegawai') ?>" class="btn btn-info"><i class="fa fa-sign-out"></i> Kembali</a>
+                                    <a href="<?php echo site_url('user') ?>" class="btn btn-info"><i class="fa fa-sign-out"></i> Kembali</a>
                             </div>
                         </div>
                     </form>

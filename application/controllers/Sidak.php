@@ -16,18 +16,18 @@ class Sidak extends CI_Controller {
 	public function index()
 	{
 		if(empty($_GET['jenis'])){
-			$title = "Semua Sidak";
+			$title = "Semua Tinjauan Lapangan";
 		}
 		else{
 			if(isset($_GET['sub'])){
 				//sub
 				$getTitle = $this->Admin_model->submenu(['id_sub_menu' => $_GET['sub']])->row();
-				$title = "Sidak ".$getTitle->sub_menu;
+				$title = "Tinjauan Lapangan ".$getTitle->sub_menu;
 			}
 			else{
 				//menu
 				$getTitle = $this->Admin_model->menu(['id_menu' => $_GET['jenis']])->row();
-				$title = "Sidak ".$getTitle->menu;
+				$title = "Tinjauan Lapangan ".$getTitle->menu;
 			}
 		}
 
@@ -214,7 +214,7 @@ class Sidak extends CI_Controller {
 			);
 			$this->Admin_model->insert_table('galery_rapat', $data);
 		}
-        redirect('absensi');
+        redirect('sidak');
     }
     public function sidak_json(){
 		header('Content-Type: application/json');

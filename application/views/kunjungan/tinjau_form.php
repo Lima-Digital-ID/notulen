@@ -95,7 +95,7 @@ function tipeKunjungan($tipe){
                             </textarea>
                         </div> 
                         <div class="form-group" >
-                            <label for="">Undangan</label>
+                            <label for="">Hadir Dalam Pertemuan</label>
                             <textarea name="undangan" cols="50" rows="15" class="mymce">
                             <?=$row_kunjungan->undangan?>
                             </textarea>
@@ -138,7 +138,14 @@ function tipeKunjungan($tipe){
                         </div>
                         <div class="col-md-6 form-group">
                             <label for="">Nama Pelapor</label>
-                            <input type="text" name="pelapor" class="form-control" value="<?= $row_kunjungan->pelapor ?>"/>
+                            <select name="pelapor" id="" style="width:100%" class="select2 form-control">
+                                <?php 
+                                    foreach ($pegawai as $key => $value) {
+                                        $s = $row_kunjungan->pelapor == $value->id_pegawai ? 'selected' : '';
+                                        echo "<option value='$value[id_pegawai]' $s>$value[nama_pegawai]</option>";
+                                    }
+                                ?>
+                            </select>
                         </div>
 <!--                         <div class="form-group">
                             <label for="">List Anggota Dewan</label>&nbsp;<a href="<?= base_url() . "Kunjungan/addDetailnama" ?>" class="btn btn-primary btn-xs addDetail" style="margin-top:5px"><i class="fa fa-plus"></i></a><br>

@@ -97,9 +97,9 @@
                                 <select name="id_jabatan[]" multiple="multiple"  class="form-control select2" style="width:100%" required  onchange="cekKategori()">
                                     <!-- <option value="" <?=$tipe == '' ? 'selected' : ''?>>--Pilih Kategori--</option> -->
                                     <!-- <option value="2">Sekretariat DPRD</option> -->
-                                    <?php 
+                                    <?php
                                         foreach ($allJab as $key => $value) {
-                                            $selected  = $tipe==$value->id ? 'selected' : '';
+                                            $selected  = in_array($value->id,$id_jabatan)  ? 'selected' : '';
                                             echo "<option value='$value->id' $selected>$value->jabatan</option>";
                                         }
                                     ?>

@@ -63,107 +63,88 @@ body{
         </tr>
     </tbody>
 </table>
-<br><hr><hr>
-<table>
+<br><hr>
+<table width="100%">
     <tbody>
         <tr>
-            <td width="88">
+            <td>
                 <p>Nomor</p>
             </td>
-            <td width="23">
+            <td>
+            :
             </td>
-            <td width="252">
+            <td>
             <p><?php echo sprintf("%03s", $this->uri->segment(3)) ?> / &nbsp;&nbsp;&nbsp;Audiensi /<?php echo bln(date('n')) ?>/ <?php echo date('Y') ?></p>
             </td>
-            <td width="16">
-            </td>
-            <!-- <td width="214">
+            <td></td>
+            <td>
                 <p>Kepada :</p>
-            </td> -->
+            </td>
         </tr>
         <tr>
-            <td width="88">
+            <td>
                 <p>Sifat</p>
             </td>
-            <td width="23">
-                <p>:</p>
+            <td>
+            :
             </td>
-            <td width="252">
+            <td>
                 <p>Biasa</p>
             </td>
-            <td width="16">
-                <p>&nbsp;</p>
-            </td>
-            <td width="214">
+            <td></td>
+            <td>
                 <p>Yth. Ketua &nbsp;DPRD</p>
             </td>
         </tr>
         <tr>
-            <!-- <td width="88">
+            <td>
                 <p>Lampiran</p>
-            </td> -->
-            <td width="23">
-                <p>:</p>
             </td>
-            <td width="252">
+            <td>
+            :
+            </td>
+            <td>
                 <p>1 (satu) berkas</p>
             </td>
-            <td width="16">
+            <td>
                 <p>&nbsp;</p>
             </td>
-            <td width="214">
+            <td>
                 <p>KOTA BLITAR</p>
             </td>
         </tr>
         <tr>
-            <td width="88">
+            <td>
                 <p>Perihal</p>
             </td>
-            <td width="23">
+            <td>
                 <p>:</p>
             </td>
-            <td width="252">
+            <td>
             <p><?= $row_kunjungan->nama ?></p>
             </td>
-            <td width="16">
+            <td>
                 <p>&nbsp;</p>
             </td>
-            <td width="214">
+            <td>
                 <p>Di -</p>
             </td>
         </tr>
         <tr>
-            <td width="88">
+            <td>
                 <p>&nbsp;</p>
             </td>
-            <td width="23">
+            <td>
                 <p>&nbsp;</p>
             </td>
-            <td width="252">
+            <td>
                 <p>&nbsp;</p>
             </td>
-            <td width="16">
+            <td>
                 <p>&nbsp;</p>
             </td>
-            <td width="214">
+            <td>
                 <p><strong><u>BLITAR</u></strong></p>
-            </td>
-        </tr>
-        <tr>
-            <td width="88">
-                <p>&nbsp;</p>
-            </td>
-            <td width="23">
-                <p>&nbsp;</p>
-            </td>
-            <td width="252">
-                <p>&nbsp;</p>
-            </td>
-            <td width="16">
-                <p>&nbsp;</p>
-            </td>
-            <td width="214">
-                <p>&nbsp;</p>
             </td>
         </tr>
     </tbody>

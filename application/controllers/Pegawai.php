@@ -78,7 +78,8 @@ class Pegawai extends CI_Controller
             'nip' => set_value('nip'),
             'nia' => set_value('nia'),
             'priority' => set_value('priority'),
-            'tipe' => set_value('tipe'),
+            'tipe' => set_value('tipe',isset($_GET['tipe']) ? $_GET['tipe'] : set_value('tipe')),
+            'id_jabatan' => set_value('id_jabatan'),
             'jenis_jabatan' => set_value('jenis_jabatan'),
             'jk' => set_value('jk'),
             'id_partai' => set_value('id_partai'),
@@ -166,6 +167,11 @@ class Pegawai extends CI_Controller
         $row = $this->Tbl_pegawai_model->get_by_id($id);
 
         if ($row) {
+            $get_id_jabatan = $this->db->get_where('tbl_jabatan_pegawai',['id_pegawai' => $id])->result();
+            $id_jabatan = [];
+            foreach ($get_id_jabatan as $key => $value) {
+                array_push($id_jabatan,$value->id_jabatan);
+            }
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('pegawai/update_action'),
@@ -174,6 +180,7 @@ class Pegawai extends CI_Controller
                 'nip' => set_value('nip', $row->nip),
                 'nia' => set_value('nia', $row->nia),
                 'tipe' => set_value('tipe', $row->tipe),
+                'id_jabatan' => $id_jabatan,
                 // 'jenis_jabatan' => set_value('jenis_jabatan', $row->jenis_jabatan),
                 'id_partai' => set_value('id_partai', $row->id_partai),
                 'id_komisi' => set_value('id_komisi', $row->id_komisi),

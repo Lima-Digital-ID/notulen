@@ -73,6 +73,7 @@
                 "url": "<?=base_url('user/json')?>",
                 "type": "POST"
             },
+            "aaSorting": [[ 1, "desc" ]],
             rowCallback: function(row, data, iDisplayIndex) {
                 var info = this.fnPagingInfo();
                 var page = info.iPage;
@@ -84,11 +85,18 @@
                 {"data": "username"},
                 {"data": "username"},
                 {"data": "email"},
-                {"data": "nama_pegawai",},
+                {"data": "nama_pegawai"},
                 {
                     "data" : "action",
                     "orderable": false,
-                    "className" : "text-center"
+                    "className" : "text-center",
+                    "render": function(data, type, row){
+                        var ret = row.edit;
+                        if(row.role!=1){
+                            ret+=" "+row.delete
+                        }
+                        return ret
+                    }      
                 }
             ],
             order: [[0, 'desc']],
