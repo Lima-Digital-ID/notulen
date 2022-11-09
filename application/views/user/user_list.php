@@ -52,18 +52,37 @@
 <script src="<?=base_url('assets/')?>theme/assets/libs/jquery/dist/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
+        $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings)
+      {
+          return {
+              "iStart": oSettings._iDisplayStart,
+              "iEnd": oSettings.fnDisplayEnd(),
+              "iLength": oSettings._iDisplayLength,
+              "iTotal": oSettings.fnRecordsTotal(),
+              "iFilteredTotal": oSettings.fnRecordsDisplay(),
+              "iPage": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
+              "iTotalPages": Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
+          };
+      };
+         
        $('#pegawai_list').DataTable( {
             "processing": true,
             "serverSide": true,
+            "orderable":false,
             "ajax": {
                 "url": "<?=base_url('user/json')?>",
                 "type": "POST"
             },
+            rowCallback: function(row, data, iDisplayIndex) {
+                var info = this.fnPagingInfo();
+                var page = info.iPage;
+                var length = info.iLength;
+                var index = page * length + (iDisplayIndex + 1);
+                $('td:eq(0)', row).html(index);
+            },            
             columns: [
-                {
-                    "data": "id",
-                    "orderable": false
-                },{"data": "username"},
+                {"data": "username"},
+                {"data": "username"},
                 {"data": "email"},
                 {"data": "nama_pegawai",},
                 {
