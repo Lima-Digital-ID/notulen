@@ -468,8 +468,8 @@ class Kunjungan extends CI_Controller {
 			'sub_tipe'  => $sub_tipe,
 			'anggota'   => $dt,
 			'anggota_kunjungan'   => $anggota_kunjungan,
-			'sekretaris' => $this->Admin_model->getSekretarisKunjungan($id)->result_array()[0],
-			'tipe_pegawai' => $this->Admin_model->getData("*","tipe_pegawai","",['id_tipe' => $_GET['id_tipe']],'')->result_array()[0]
+			'sekretaris' => $this->Admin_model->getSekretarisKunjungan($id)->row(),
+			'tipe_pegawai' => $this->Admin_model->getData("*","tipe_pegawai","",['id_tipe' => $_GET['id_tipe']],'')->row()
 		);
 		$this->load->view('kunjungan/export_daftar_hadir', $data);
 	}
