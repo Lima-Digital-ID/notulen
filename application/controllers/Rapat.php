@@ -616,8 +616,8 @@ class Rapat extends CI_Controller {
 		$data = array(
 			'row_rapat' => $row_rapat,
 			'anggota_rapat' => $anggota_rapat,
-			'sekretaris' => $this->Admin_model->getSekretarisRapat($id)->result_array()[0],
-			'tipe_pegawai' => $this->Admin_model->getData("*","tipe_pegawai","",['id_tipe' => $_GET['id_tipe']],'')->result_array()[0]
+			'sekretaris' => $this->Admin_model->getSekretarisRapat($id)->row(),
+			'tipe_pegawai' => $this->Admin_model->getData("*","tipe_pegawai","",['id_tipe' => $_GET['id_tipe']],'')->row()
 		);
         $this->load->view('rapat/export_daftar_hadir', $data);
 	}
