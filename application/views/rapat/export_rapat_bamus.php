@@ -257,7 +257,7 @@ body{
             <tr>
                 <td width="60%"></td>
                 <td align="center">
-                    <p>Notulis Kegiatan</p>
+                    <p>sekertaris DPRD Kota Blitar</p>
                 </td>
             </tr>
             <tr>
