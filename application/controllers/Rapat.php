@@ -534,7 +534,7 @@ class Rapat extends CI_Controller {
     {
 		if($word=="true"){
 			header("Content-type: application/vnd.ms-word");
-			header("Content-Disposition: attachment;Filename=Daftar Hadir Kegiatan.doc");
+			header("Content-Disposition: attachment;Filename=Notulen.doc");
 		}
 
 		$row_rapat = $this->Admin_model->get_table_by_id('rapat', $id);
