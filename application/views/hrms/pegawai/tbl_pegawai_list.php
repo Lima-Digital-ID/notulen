@@ -178,7 +178,7 @@
         else if(val==4){
             return 'Mitra Kerja HORIZONTAL'
         }
-        else if(val==3){
+        else if(val==5){
             return 'Mitra Kerja Vertikal'
         }
     }
