@@ -201,8 +201,7 @@ ul,ol{
                 <td></td>
                 <td align="center">
                 <?php
-                    echo $sekretarisRow;
-                    if($sekretarisRow=!0){
+                    if($sekretarisRow!=0){
                 ?>
                     <img src="<?php echo base_url()."assets/images/upload-ttd/".$sekretaris->ttd ?>" alt="" width="150">
                     <p><strong><u><?php echo strtoupper($sekretaris->nama_pegawai) ?></u></strong></p>
