@@ -200,9 +200,13 @@ ul,ol{
             <tr>
                 <td></td>
                 <td align="center">
+                <?php
+                    if($sekretarisRow=!0){
+                ?>
                     <img src="<?php echo base_url()."assets/images/upload-ttd/".$sekretaris->ttd ?>" alt="" width="150">
                     <p><strong><u><?php echo strtoupper($sekretaris->nama_pegawai) ?></u></strong></p>
                     <p>NIP. <?php echo $sekretaris->nip ?></p>
+                <?php } ?>
                 </td>
             </tr>
         </tbody>

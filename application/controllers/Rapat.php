@@ -545,6 +545,7 @@ class Rapat extends CI_Controller {
 			'row_rapat' => $row_rapat,
 			'tipe_pegawai' => $tipePegawai,
 			// 'anggota_rapat' => $anggota_rapat,
+			'sekretarisRow' => $this->Admin_model->getSekretarisRapat($id)->num_rows(),
 			'sekretaris' => $this->Admin_model->getSekretarisRapat($id)->row(),
 			'galery' => $this->Admin_model->galery_rapat($id),
 			'id_rapat' => $id,
