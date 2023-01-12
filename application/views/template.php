@@ -421,6 +421,7 @@ $role_id=$this->session->userdata('role');
     <script src="<?= base_url('assets/') ?>theme/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="<?= base_url('assets/sig') ?>/js/numeric-1.2.6.min.js"></script>
     <script src="<?= base_url('assets/sig') ?>/js/bezier.js"></script>
+    <script src="https://raw.githubusercontent.com/furf/jquery-ui-touch-punch/master/jquery.ui.touch-punch.min.js"></script>
     <script src="<?= base_url('assets/sig') ?>/js/jquery.signaturepad.js"></script>
     <script src="<?= base_url('assets/sig') ?>/js/html2canvas.js" type='text/javascript'></script>
     <script src="<?= base_url('assets/sig') ?>/js/json2.min.js"></script>

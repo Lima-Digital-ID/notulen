@@ -27,11 +27,9 @@ table td, table td * {
 }
 .table.bordered {
     border-collapse: collapse;
-    border: 1px solid black;
 }
 
 .bordered th, .bordered td {
-    border: 1px solid black;
     padding: 5px;
 }
 
@@ -50,131 +48,13 @@ body{
         page-break-before : always;   
     }
 }
+ul,ol{
+    padding-left:15px;
+}
 </style>
 <body class="page">
-    <table style="height: 160px; width: 80%;">
-    <tbody>
-        <tr>    
-            <td><img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Lambang_Kota_Blitar.png" alt="" width="110" height="100"/>
-            <td align="center">
-                <span style="font-size:18px"><strong>DEWAN PERWAKILAN RAKYAT DAERAH<br>
-                KOTA&nbsp; BLITAR</strong></span><br>
-                <span style="font-size:18px">JL. A. Yani No. 19 Telp. (0342) 801602</span><br>
-                Situs web : http://setwan.blitarkota.go.id <br> e-mail : setwan@blitarkota.go.id<br>
-                <span style="font-size:18px"><strong>B L I T A R</strong></span>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<br><hr>
-<table>
-    <tbody>
-        <tr>
-            <td width="88">
-                <p>Nomor</p>
-            </td>
-            <td width="23">
-                <p>:</p>
-            </td>
-            <td width="252">
-                <p><?php echo $row_rapat->nomor ?></p>
-            </td>
-            <td width="16">
-            </td>
-            <!-- <td width="214">
-                <p>Kepada :</p>
-            </td> -->
-        </tr>
-        <tr>
-            <td width="88">
-                <p>Sifat</p>
-            </td>
-            <td width="23">
-                <p>:</p>
-            </td>
-            <td width="252">
-                <p><?= $row_rapat->sifat=='0' ? 'Tertutup' : 'Terbuka' ?></p>
-            </td>
-            <td width="16">
-                <p>&nbsp;</p>
-            </td>
-            <td width="214">
-                <p>Yth. Ketua &nbsp;DPRD</p>
-            </td>
-        </tr>
-        <tr>
-            <td width="88">
-                <p>Lampiran</p>
-            </td>
-            <td width="23">
-                <p>:</p>
-            </td>
-            <td width="252">
-                <p>1 (satu) berkas</p>
-            </td>
-            <td width="16">
-                <p>&nbsp;</p>
-            </td>
-            <td width="214">
-                <p>KOTA BLITAR</p>
-            </td>
-        </tr>
-        <tr>
-            <td width="88">
-                <p>Perihal</p>
-            </td>
-            <td width="23">
-                <p>:</p>
-            </td>
-            <td width="252">
-                <p><?= $row_rapat->title ?></p>
-            </td>
-            <td width="16">
-                <p>&nbsp;</p>
-            </td>
-            <td width="214">
-                <p>Di -</p>
-            </td>
-        </tr>
-        <tr>
-            <td width="88">
-                <p>&nbsp;</p>
-            </td>
-            <td width="23">
-                <p>&nbsp;</p>
-            </td>
-            <td width="252">
-                <p>&nbsp;</p>
-            </td>
-            <td width="16">
-                <p>&nbsp;</p>
-            </td>
-            <td width="214">
-                <p><strong><u>BLITAR</u></strong></p>
-            </td>
-        </tr>
-        <tr>
-            <td width="88">
-                <p>&nbsp;</p>
-            </td>
-            <td width="23">
-                <p>&nbsp;</p>
-            </td>
-            <td width="252">
-                <p>&nbsp;</p>
-            </td>
-            <td width="16">
-                <p>&nbsp;</p>
-            </td>
-            <td width="214">
-                <p>&nbsp;</p>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<p>&nbsp;</p>
     <center><h3><strong><u>NOTULEN&nbsp; KEGIATAN</u></strong></h3></center>
-    <table width="100%" class="table" border="1">
+    <table width="100%" class="table bordered" border="1">
         <tbody>
             <tr>
                 <td width="39">
@@ -201,11 +81,38 @@ body{
                     <p>:</p>
                 </td>
                 <td width="454">
-                    <p>Hari&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp; <?=getDay($row_rapat->tanggal);?></p>
-                    <p>Tanggal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp; <?=formatBulan($row_rapat->tanggal)?></p>
-                    <p>Jam&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp; <?=date('H:i', strtotime($row_rapat->waktu))?> &nbsp;WIB&nbsp; s.d&nbsp;&nbsp; selesai</p>
-                    <p>Tempat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp; <?=$row_rapat->tempat?></p>
-                    <p>Acara&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;<?=$row_rapat->event?></p>
+                    <table>
+                        <tr>
+                            <td>Hari</td>
+                            <td>:</td>
+                            <td><?=getDay($row_rapat->tanggal);?></td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal</td>
+                            <td>:</td>
+                            <td><?=formatBulan($row_rapat->tanggal)?></td>
+                        </tr>
+                        <tr>
+                            <td>Jam</td>
+                            <td>:</td>
+                            <td><?=date('H:i', strtotime($row_rapat->waktu))?> &nbsp;WIB&nbsp; s.d&nbsp;&nbsp; selesai</td>
+                        </tr>
+                        <tr>
+                            <td>Tempat</td>
+                            <td>:</td>
+                            <td><?=$row_rapat->tempat?></td>
+                        </tr>
+                        <tr>
+                            <td>Acara</td>
+                            <td>:</td>
+                            <td><?=$row_rapat->title?></td>
+                        </tr>
+                        <tr>
+                            <td>Materi</td>
+                            <td>:</td>
+                            <td><?=$row_rapat->acara?></td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
             <tr>
@@ -222,21 +129,45 @@ body{
                     <?php 
                         foreach ($tipe_pegawai as $key => $value) {
                             $this->db->select('nama_pegawai');
-                            $this->db->join("anggota_rapat ar","tp.id_pegawai=ar.id_pegawai");
-                            $anggota_rapat = $this->db->get_where("tbl_pegawai tp",['ar.id_rapat' => $id_rapat,'tp.tipe' => $value->id_tipe])->result();
-                            echo "<p style='margin-bottom:5px'>".$value->tipe."</p>";
-
-                            foreach ($anggota_rapat as $i => $v) {
-                                echo "<span style='margin-left:10px'>- ".$v->nama_pegawai."</span><br>";
+                            $this->db->join("tbl_pegawai tp","ar.id_pegawai=tp.id_pegawai");
+                            $anggota_rapat = $this->db->get_where("absensi_rapat ar",['ar.id_rapat' => $id_rapat,'tp.tipe' => $value->id_tipe]);
+                            $row = $anggota_rapat->num_rows();
+                            if($row!=0){
+                                echo "<p style='margin-bottom:5px'>".$value->tipe."</p>";
+                                
+                                $anggota_rapat =  $anggota_rapat->result();
+                                foreach ($anggota_rapat as $i => $v) {
+                                    echo "<span style='margin-left:10px'>- ".$v->nama_pegawai."</span><br>";
+                                }
+                                echo "<br>";
                             }
-                            echo "<br>";
                         }
                     ?>
                 </td>
             </tr>
             <tr>
                 <td width="39">
-                    <p>4.</p>
+                    <p>3.</p>
+                </td>
+                <td width="195">
+                    <p>IJIN TIDAK HADIR</p>
+                </td>
+                <td width="19">
+                    <p>:</p>
+                </td>
+                <td width="454">
+                    <?php 
+                        $query = $this->db->query("SELECT nama_pegawai FROM anggota_rapat ar join tbl_pegawai tp on ar.id_pegawai = tp.id_pegawai WHERE id_rapat = '$id_rapat' AND ar.id_pegawai NOT IN (SELECT id_pegawai FROM absensi_rapat WHERE id_rapat = '$id_rapat');")->result();
+
+                        foreach ($query as $key => $value) {
+                            echo "<p style='margin-left:10px'>- ".$value->nama_pegawai."</p>";
+                        }
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td width="39">
+                    <p>5.</p>
                 </td>
                 <td width="195">
                     <p>HASIL&nbsp; KEGIATAN</p>
@@ -257,7 +188,7 @@ body{
             <tr>
                 <td width="60%"></td>
                 <td align="center">
-                    <p>sekertaris DPRD Kota Blitar</p>
+                    <p>Sekertaris DPRD Kota Blitar</p>
                 </td>
             </tr>
             <tr>
