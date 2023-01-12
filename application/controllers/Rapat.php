@@ -532,10 +532,10 @@ class Rapat extends CI_Controller {
 	}
 	public function word_bamus($id,$word="true")
     {
-		// if($word=="true"){
-		// 	header("Content-type: application/vnd.ms-word");
-		// 	header("Content-Disposition: attachment;Filename=Notulen.doc");
-		// }
+		if($word=="true"){
+			header("Content-type: application/vnd.ms-word");
+			header("Content-Disposition: attachment;Filename=Notulen.doc");
+		}
 
 		$row_rapat = $this->Admin_model->get_table_by_id('rapat', $id);
 		// $anggota_rapat = $this->Admin_model->anggota_rapat_order_jabatan($id);
@@ -551,8 +551,7 @@ class Rapat extends CI_Controller {
 			'id_rapat' => $id,
 		);
 		// echo json_encode($anggota_rapat);
-		echo $data['sekretarisRow'];
-    //    $this->load->view('rapat/export_rapat_bamus', $data);
+       $this->load->view('rapat/export_rapat_bamus', $data);
 	}
 	public function anggota_rapat($id, $tipe)
 	{
