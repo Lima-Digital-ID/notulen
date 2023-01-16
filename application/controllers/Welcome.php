@@ -122,12 +122,13 @@ class Welcome extends CI_Controller {
 			$data['url'].="gallery/$dir";
 		}
  */
-		$join = "join kunjungan on galery_rapat.id_rapat = kunjungan.id";
+		$join = "left join kunjungan on galery_rapat.id_rapat = kunjungan.id";
 		$whereSub = $sub!="" ? "and kunjungan.sub_jenis_kunjungan = '$sub' " : "";
+		$whereSub2 = $sub!="" ? "and galery_rapat.sub_tipe_komisi = '$sub' " : "";
 		$where = "kunjungan.jenis_kunjungan = '$tipe' ".$whereSub;
 
 		if($dir=='rapat'){
-			$join = "join rapat on galery_rapat.id_rapat = rapat.id";
+			$join = "left join rapat on galery_rapat.id_rapat = rapat.id";
 			$whereSub = $sub!="" ? "and rapat.sub_tipe_komisi = '$sub' " : "";
 			$where = "rapat.tipe = '$tipe' ".$whereSub;
 
@@ -149,6 +150,9 @@ class Welcome extends CI_Controller {
 
 			$data['url'].="galery_sidak/$dir";
 		}
+
+		$where = "($where) or (galery_rapat.tipe_rapat = '$tipe' ".$whereSub2.")";
+
 		$data['dir'] = $this->db->query("select DATE_FORMAT(galery_rapat.Created_At,'%Y-%m-%d') as date from galery_rapat $join WHERE $where and galery_rapat.tipe=$tableTipe group by date ")->result_array();
 
 		$this->template->load('template', 'page/galeriByDate',$data);
@@ -156,25 +160,86 @@ class Welcome extends CI_Controller {
 	}
 	public function galery_rapat($rapat="",$cat,$date){
 	    $data['title'] = "Galeri - Rapat";
-		$sub = isset($_GET['sub']) ? "r.sub_tipe_komisi = '$_GET[sub]' and" : "";
-
-		$data['galeri'] = $this->db->query("SELECT g.*,r.title as nama FROM galery_rapat g join rapat r on g.id_rapat = r.id  WHERE r.tipe='$cat' and $sub ".$this->between($date)." and g.tipe=1 ORDER BY id DESC ")->result();
+		$data['tipe'] = 1;
+		$data['tipe_rapat'] = $cat;
+		$data['date'] = $date;
+		$sub = isset($_GET['sub']) ? "and r.sub_tipe_komisi = '$_GET[sub]'" : "";
+		$sub2 = isset($_GET['sub']) ? "and g.sub_tipe_komisi = '$_GET[sub]'" : "";
+		
+		$data['galeri'] = $this->db->query("SELECT g.*,r.title as nama FROM galery_rapat g left join rapat r on g.id_rapat = r.id  WHERE ((r.tipe='$cat' $sub) or (g.tipe_rapat='$cat' $sub2)) and ".$this->between($date)." and g.tipe=1 ORDER BY id DESC ")->result();
+		
 		$this->template->load('template', 'page/galeri',$data);
 	}
 	public function galery_kunjungan($kunjungan="",$cat,$date){
-	    $data['title'] = "Galeri - Kunjungan";
-		$sub = isset($_GET['sub']) ? "k.sub_jenis_kunjungan = '$_GET[sub]' and" : "";
-
-		$data['galeri'] = $this->db->query("SELECT g.*, k.nama as nama FROM galery_rapat g join kunjungan k on g.id_rapat = k.id WHERE k.jenis_kunjungan = '$cat' and $sub ".$this->between($date)." and g.tipe=2 ORDER BY id DESC ")->result();
+		$data['title'] = "Galeri - Kunjungan";
+		$data['tipe'] = 2;
+		$data['tipe_rapat'] = $cat;
+		$data['date'] = $date;
+		$sub = isset($_GET['sub']) ? "and k.sub_jenis_kunjungan = '$_GET[sub]'" : "";
+		$sub2 = isset($_GET['sub']) ? "and g.sub_tipe_komisi = '$_GET[sub]'" : "";
+		
+		$data['galeri'] = $this->db->query("SELECT g.*, k.nama as nama FROM galery_rapat g left join kunjungan k on g.id_rapat = k.id WHERE ((k.jenis_kunjungan = '$cat' $sub) or (g.tipe_rapat='$cat' $sub2)) and ".$this->between($date)." and g.tipe=2 ORDER BY id DESC ")->result();
 		$this->template->load('template', 'page/galeri',$data);
 	}
 	public function galery_sidak($sidak="",$cat,$date){
-	    $data['title'] = "Galeri - Sidak";
-		$sub = isset($_GET['sub']) ? "k.sub_jenis_kunjungan = '$_GET[sub]' and" : "";
-
-		$data['galeri'] = $this->db->query("SELECT g.*, k.nama as nama FROM galery_rapat g join kunjungan k on g.id_rapat = k.id WHERE k.jenis_kunjungan = '$cat' and $sub ".$this->between($date)." and g.tipe=3 ORDER BY id DESC ")->result();
+		$data['title'] = "Galeri - Sidak";
+	    $data['tipe'] = 3;
+		$data['tipe_rapat'] = $cat;
+		$data['date'] = $date;
+		$sub = isset($_GET['sub']) ? "and k.sub_jenis_kunjungan = '$_GET[sub]'" : "";
+		$sub2 = isset($_GET['sub']) ? "and g.sub_tipe_komisi = '$_GET[sub]'" : "";
+		
+		$data['galeri'] = $this->db->query("SELECT g.*, k.nama as nama FROM galery_rapat g join kunjungan k on g.id_rapat = k.id WHERE ((k.jenis_kunjungan = '$cat' $sub) or (g.tipe_rapat='$cat' $sub2)) and ".$this->between($date)." and g.tipe=3 ORDER BY id DESC ")->result();
 		$this->template->load('template', 'page/galeri',$data);
 	}
+
+	public function addGallery()
+	{
+		$config['upload_path'] = 'assets/images/bukti_rapat'; //buat folder dengan nama assets di root folder
+		$config['allowed_types'] = 'jpg|jpeg|png|gif';
+
+		$filename = $_FILES['file']['name'];
+		$ext = pathinfo($filename, PATHINFO_EXTENSION);
+		
+		$newname='bukti_rapat_'.time().'.'.$ext;
+		$config['file_name']= $newname;
+
+		// Load and initialize upload library
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+
+		// Upload file to server
+		if($this->upload->do_upload('file')){
+			$imageData = $this->upload->data();
+
+			$data=array(
+				'tipe_rapat' => $_POST['tipe_rapat'],
+				'tipe' => $_POST['tipe'],
+				'file' => $imageData['file_name'],
+				'created_at' => $_POST['date']." ".date('H:i:s'),
+			);
+
+			if(isset($_POST['sub_tipe_komisi'])){
+				$data['sub_tipe_komisi'] = $_POST['sub_tipe_komisi'];
+			}
+
+			$this->Admin_model->insert_table('galery_rapat', $data);
+		}
+		if($_POST['tipe']==1){
+			$tipeUrl = 'rapat';
+		}
+		else if($_POST['tipe']==2){
+			$tipeUrl = 'kunjungan';
+		}
+		else{
+			$tipeUrl = 'sidak';
+		}
+	
+		$isSub = isset($_POST['sub_tipe_komisi']) ? "?sub=".$_POST['sub_tipe_komisi'] : "";
+		redirect(base_url("welcome/galery_rapat/$tipeUrl/$data[tipe_rapat]/$_POST[date]".$isSub));
+
+	}
+
 	public function add_product()
 	{
 		if ($this->role != 1) {

@@ -23,19 +23,41 @@
 <div class="card shadow py-2">
     <div class="card-body">
         <div class="row">
-
-<?php foreach ($galeri as $g) { ?>
-                    <div class="col-md-6 col-lg-3 col-xlg-3 rounded">
-                    <div class="card card-hover">
-                    <div  class="box bg-danger text-center">
-                    <div class="text-center justify-center">
-                                            <img style="width: 200px; height:250px; padding: 10px;" src="<?php echo base_url('assets/images/bukti_rapat/' . $g->file); ?>" alt="">
-                                            <h5 style="margin-left: 10px; margin-top: 12px;" class="text-white">Dokumentasi <?= ucwords(str_replace('sidak','Tinjauan Lapangan', $this->uri->segment(3))); ?> : <?= ucwords($g->nama); ?></h5>
-                                            </div>
-                    </div>
-                    </div>
-                    </div>
+            <div class="col">
+                <form action="<?= base_url()."welcome/addGallery" ?>" method="post" enctype="multipart/form-data">
+                    <label for="">Upload Foto</label>
+                    <input type="hidden" name="tipe" value="<?= $tipe ?>">
+                    <input type="hidden" name="tipe_rapat" value="<?= $tipe_rapat ?>">
+                    <input type="hidden" name="date" value="<?= $date ?>">
+                    <?php 
+                        if(isset($_GET['sub'])){
+                    ?>
+                        <input type="hidden" name="sub_tipe_komisi" value="<?= $_GET['sub'] ?>">
                     <?php } ?>
+                    <input type="file" name="file" id="" class="form-control">
+                    <br>
+                    <button class="btn btn-primary">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card shadow py-2">
+    <div class="card-body">
+        <div class="row">
+            <?php foreach ($galeri as $g) { ?>
+                <div class="col-md-6 col-lg-3 col-xlg-3 rounded">
+                    <div class="card card-hover">
+                        <div  class="box bg-danger text-center">
+                            <div class="text-center justify-center">
+                                <img style="width: 250px; padding: 10px;" src="<?php echo base_url('assets/images/bukti_rapat/' . $g->file); ?>" alt="">
+                                
+                                <h5 style="margin-left: 10px; margin-top: 12px;" class="text-white">Dokumentasi <?= ucwords(str_replace('sidak','Tinjauan Lapangan', $this->uri->segment(3))); ?> : <?= ucwords($g->nama); ?></h5>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            <?php } ?>
+        </div>
     </div>
 </div>
