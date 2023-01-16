@@ -406,14 +406,14 @@ foreach ($db as $a) : ?>
         var longitude = $('#longitude').val();
         var latitude = $('#latitude').val();
         var file_absen = $('#file_absen').val();
-        if (longitude == '' || latitude == '' || file_absen == '') {
+        // if (longitude == '' || latitude == '' || file_absen == '') {
 
-            if (confirm("halaman ini akan di refresh?")) {
-                location.reload()
-            }
-        } else {
+        //     if (confirm("halaman ini akan di refresh?")) {
+        //         location.reload()
+        //     }
+        // } else {
+        // }
             $('#form_absen').submit();
-        }
     }
     function checkSubmited2() {
         var longitude = $('#longitude2').val();
